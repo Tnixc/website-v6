@@ -27,12 +27,21 @@
     }
 }
 
-.prose-hl {
+.prose {
     h1 {
         @apply text-xl font-semibold pt-7;
     }
+    h2 {
+        @apply text-lg font-semibold pt-6;
+    }
+    h3 {
+        @apply text-base font-semibold pt-5;
+    }
+    hr {
+        @apply border-neutral-400/50 mt-7 border-[1.5px];
+    }
     p {
-        @apply text-neutral-800 pt-3 leading-relaxed;
+        @apply text-neutral-700 pt-3 leading-relaxed;
     }
     strong {
         @apply not-italic font-semibold bg-amber-300/60;
@@ -43,12 +52,39 @@
     a {
         @apply hover:underline underline-offset-4 decoration-2;
     }
+    blockquote {
+        @apply border-l-4 border-neutral-400 pl-4 italic text-neutral-600;
+    }
+    ul {
+        @apply list-disc list-inside pt-3;
+    }
+    ol {
+        @apply list-decimal list-inside pt-3;
+    }
+    li {
+        @apply pt-1 text-neutral-700;
+    }
+    pre {
+        @apply bg-neutral-100 p-4 rounded text-sm font-mono leading-snug;
+    }
+    code {
+        @apply bg-neutral-100 px-1 rounded text-sm font-mono;
+    }
+    table {
+        @apply w-full border-collapse border border-neutral-300 mt-6;
+    }
+    th, td {
+        @apply border border-neutral-300 px-4 py-2 text-left;
+    }
+    th {
+        @apply bg-neutral-100 font-semibold;
+    }
 }
 
 pre *{
     filter: saturate(1.9);
 }
 pre {
-    background-color: #e4e5e4 !important;
+    background-color: #3e3e5e !important;
     @apply p-4 px-5 overflow-scroll rounded-md;
 }

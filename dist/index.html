@@ -238,7 +238,7 @@
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./output.css">
+    <link rel="stylesheet" href="/output.css">
     <link rel="icon" href="/favicon.png" type="image/png">
     <title>tnixc.space</title>
 </head>
@@ -295,10 +295,10 @@
 </svg>
 </a>
     <div class="flex flex-col gap-5 pl-2">
-        <a class="hover:underline underline-offset-4 w-fit decoration-2" href="./index.html">about me</a>
-        <a class="hover:underline underline-offset-4 w-fit decoration-2" href="./projects.html">projects</a>
-        <a class="hover:underline underline-offset-4 w-fit decoration-2" href="./writing.html">writing</a>
-        <a class="hover:underline underline-offset-4 w-fit decoration-2" href="./random.html">random</a>
+        <a class="hover:underline underline-offset-4 w-fit decoration-2" href="/index.html">about me</a>
+        <a class="hover:underline underline-offset-4 w-fit decoration-2" href="/projects.html">projects</a>
+        <a class="hover:underline underline-offset-4 w-fit decoration-2" href="/writing.html">writing</a>
+        <a class="hover:underline underline-offset-4 w-fit decoration-2" href="/random.html">random</a>
     </div>
 </div>
 
@@ -321,51 +321,79 @@
 
     </p>
     <!-- prettier-ignore -->
-    <div class="prose-hl">
-    <p>Hello! I'm a grade 12 highschool student from Hong Kong studing in Canada. I spend most of my time programming, reading, and watching anime. I draw sometimes as well. I want to learn a lot of things.</p>
+    <div class="prose">
+    <p>Hello! I'm a grade 12 high school student from Hong Kong studying in Canada. I spend most of my time programming, reading, and watching anime. I draw sometimes as well. I want to learn a lot of things.</p>
 <h1>Work</h1>
-<p>I usually work with web technologies, but I've been doing a lot of stuff in rust recently too. The languages I'm most familiar are <strong>Rust, JavaScript/TypeScript, and Python</strong>. I use plenty of HTML/CSS too, and I have some domain specific experience with Java as well. I'm also looking to learning Go, Nix, and Zig in the future.</p>
-<p>I've used <strong>Vue, Nuxt, Svelte, Astro</strong>, and I would say I'm most familiar with Vue. And I'm never using react if I don't have to.</p>
+<p>I usually work with web technologies, but I've been doing a lot of stuff in Rust recently too. The languages I'm most familiar with are <strong>Rust, JavaScript/TypeScript, and Python</strong>. I use plenty of HTML/CSS too, and I have some domain-specific experience with Java as well. I'm also looking to learn Go, Nix, and Zig in the future.</p>
+<p>I've used <strong>Vue, Nuxt, Svelte, Astro</strong>, and I would say I'm most familiar with Vue. And I'm never using React if I don't have to.</p>
 <p>I care deeply about UI, and I'd say design engineering is one of the roles I relate to the most.</p>
 <h1>Tools</h1>
-<p>I also work with a lot of tools. I use <strong>Zed</strong> (with vim mode enabled of course) as my primary editor. I'm also familiar with Figma, and I'm learning to use Blender. I also use a mix of apple reminders and notes, and mainly obsidian for note taking.</p>
-<p>For hardware, I run a <em>13&quot; M3 MacBook Air</em>, and a custom built PC(which I'm planning to switch to NixOS soon??). I'm pretty deep into the apple ecosystem, I've got an iPad for drawing and an iPhone and watch as well.</p>
+<p>I also work with a lot of tools. I use <strong>Zed</strong> (with vim mode enabled, of course) as my primary editor. I'm also familiar with Figma, and I'm learning to use Blender. I use a mix of Apple Reminders and Notes, and mainly Obsidian for note-taking.</p>
+<p>For hardware, I run a <em>13&quot; M3 MacBook Air</em> and a custom-built PC (which I'm planning to switch to NixOS soon). I'm pretty deep into the Apple ecosystem, as I've got an iPad for drawing, and an iPhone and Watch as well.</p>
 <h1>Hobbies</h1>
-<p>I don't play a lot of video games anymore (I enjoy programming more), but I used to be pretty into osu! and Minecraft. I've also enjoyed <em>Cyberpunk 2077, Divinity 2 Original Sin, Celeste, project sekai, and Hades</em>. I'm looking forward to playing Baldur's Gate 3 and Elden Ring at the moment. I also like arcade rhythm games like maimai DX and Wacca.</p>
-<p>I also listen to a lot of music. I like a lot of genres, but I mainly listen to J-Pop. Recently I've been listening to <em>Mili and Eve. Vocaloid, Laufey, breakcore, Porter Robinson, Madeon, and lots of game OSTs</em> also get a lot of playtime.</p>
-<p>Lastly, I also contribute to <a href="https://github.com/catppuccin">[catppuccin]</a> sometimes, and I hang out on its discord server.</p>
+<p>I don't play a lot of video games anymore (I enjoy programming more), but I used to be pretty into osu! and Minecraft. I've also enjoyed <em>Cyberpunk 2077, Divinity 2 Original Sin, Celeste, Project Sekai, and Hades</em>. I'm looking forward to playing Baldur's Gate 3 and Elden Ring. I also like arcade rhythm games like maimai DX and Wacca.</p>
+<p>I also listen to a lot of music. I like many genres, but I mainly listen to J-Pop. Recently, I've been mainly listening to <em>Mili and Eve. Vocaloid, Laufey, breakcore, Porter Robinson, Madeon, and lots of game OSTs</em> also get a lot of playtime.</p>
+<p>Lastly, I also contribute to <a href="https://github.com/catppuccin">[catppuccin]</a> sometimes, and I hang out on its Discord server.</p>
+<hr />
 
     </div>
-    <p class="pt-10">
+    <p class="pt-7">
         There's more of me at
         <a class="font-mono hover:underline underline-offset-4 decoration-2" href="./random.html"
             >[./random]</a
         >.
     </p>
 </slot>
-            <div class="gap-4 flex sm:py-20 py-6 font-mono">
-    <a
-        href="https://github.com/Tnixc"
-        class="hover:underline underline-offset-4 decoration-2 flex"
-        target="_blank"
-        >[github]<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+            <div class="sm:py-20 py-6 font-mono flex justify-between flex-wrap">
+    <div class="gap-4 flex">
+        <a
+            href="https://github.com/Tnixc"
+            class="hover:underline underline-offset-4 decoration-2 flex"
+            target="_blank"
+            >[github]<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
     <path
         fill="currentColor"
         d="M6 7c0 .55.45 1 1 1h7.59l-8.88 8.88a.996.996 0 1 0 1.41 1.41L16 9.41V17c0 .55.45 1 1 1s1-.45 1-1V7c0-.55-.45-1-1-1H7c-.55 0-1 .45-1 1"
     />
 </svg>
 </a>
-    <a
-        href="https://x.com/_Tnixc"
-        class="hover:underline underline-offset-4 decoration-2 flex"
-        target="_blank"
-        >[twitter]<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+        <a
+            href="https://x.com/_Tnixc"
+            class="hover:underline underline-offset-4 decoration-2 flex"
+            target="_blank"
+            >[twitter]<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
     <path
         fill="currentColor"
         d="M6 7c0 .55.45 1 1 1h7.59l-8.88 8.88a.996.996 0 1 0 1.41 1.41L16 9.41V17c0 .55.45 1 1 1s1-.45 1-1V7c0-.55-.45-1-1-1H7c-.55 0-1 .45-1 1"
     />
 </svg>
 </a>
+    </div>
+    <div class="gap-4 flex">
+        <a
+            href="https://cloud.umami.is/share/o4Mje48LZ8anrxZi/tnixc.space"
+            class="hover:underline underline-offset-4 decoration-2 flex"
+            target="_blank"
+            >[analytics]<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+    <path
+        fill="currentColor"
+        d="M6 7c0 .55.45 1 1 1h7.59l-8.88 8.88a.996.996 0 1 0 1.41 1.41L16 9.41V17c0 .55.45 1 1 1s1-.45 1-1V7c0-.55-.45-1-1-1H7c-.55 0-1 .45-1 1"
+    />
+</svg>
+</a>
+        <a
+            href="https://github.com/Tnixc/website-v6"
+            class="hover:underline underline-offset-4 decoration-2 flex"
+            target="_blank"
+            >[source code]<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+    <path
+        fill="currentColor"
+        d="M6 7c0 .55.45 1 1 1h7.59l-8.88 8.88a.996.996 0 1 0 1.41 1.41L16 9.41V17c0 .55.45 1 1 1s1-.45 1-1V7c0-.55-.45-1-1-1H7c-.55 0-1 .45-1 1"
+    />
+</svg>
+</a>
+    </div>
+
 </div>
 
         </main>

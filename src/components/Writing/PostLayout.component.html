@@ -1,0 +1,11 @@
+<Layout>
+<h1 class="text-xl">${title}</h1>
+<p class="text-neutral-500 pt-1">Published <span class="font-mono">${date}</span></p>
+<p class="pt-3">${description}</p>
+<div class="py-8">
+    <hr class="border-[1.5px] border-neutral-400/50" />
+</div>
+<article class="prose">
+<slot></slot>
+</article>
+</Layout>
