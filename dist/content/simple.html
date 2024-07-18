@@ -238,8 +238,31 @@
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/output.css">
-    <link rel="icon" href="/favicon.png" type="image/png">
+    <link rel="stylesheet" href="/output.css" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="tnixc.space" />
+    <meta property="og:description" content="Tnixc's very own website" />
+    <meta property="og:url" content="https://imgsrc.io/guides/open-graph-meta-tags" />
+
+    <meta
+        property="og:image"
+        content="https://utfs.io/f/50bfdf64-4309-4220-98b4-04a7f7e501b9-p3anp9.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter/X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="tnixc.space" />
+    <meta name="twitter:description" content="Tnixc's very own website" />
+    <meta
+        name="twitter:image"
+        content="https://utfs.io/f/50bfdf64-4309-4220-98b4-04a7f7e501b9-p3anp9.png"
+    />
+    <meta name="twitter:image:width" content="1200" />
+    <meta name="twitter:image:height" content="630" />
     <title>tnixc.space</title>
 </head>
 
@@ -307,23 +330,121 @@
 <a href="/writing.html" class="font-mono py-4 block w-fit underline-offset-[6px] decoration-2 hover:underline">[&lt;back]</a>
 <h1 class="text-2xl font-semibold">Simple - Building a component-based static site assembler</h1>
 <p class="text-neutral-500 pt-1">Published <span class="font-mono">18/07/2024</span></p>
-<p class="pt-3">I should have just used Astro.</p>
+<p class="pt-3">
+    I should have just used Astro.
+</p>
 <div class="py-8">
     <hr class="border-[1.5px] border-neutral-400/50" />
 </div>
 <article class="prose">
 <slot>
     <!-- prettier-ignore -->
-<h1>Hello world</h1>
+<p>I have an unhealthy addiction to redoing my personal website every few months (I have an article the history of this site <a href="https://tnixc.space/content/site_history.html">here</a>). As of v6, I've already tried Vue(and Nuxt), Svelte(kit), as well as Astro, and I was getting pretty tired of those.</p>
+<p>So obviously, I decided to write my own component-based html assembler in rust, and I'm calling it <strong>simple</strong> because it is. It was quite daunting at first, but now that it's somewhat functional it seemed pretty easy, although some compromises were made. It's pretty damn slow right now, hopefully I can fix that.</p>
+<h1>Features</h1>
+<ul>
+<li>Components, with props and slots.</li>
+<li>Templating engine</li>
+<li><code>&lt;markdown&gt;</code> component for rendering markdown.</li>
+</ul>
+<h1>Todo</h1>
+<p>This is a project that I do want to keep working on, and I want to make it proper. Here's some goals for this project that I still want to implement:</p>
+<ul>
+<li><input type="checkbox" disabled="" /> Fix bugs (extremely buggy right now).</li>
+<li><input type="checkbox" disabled="" /> Fix problem where there are 2 sources of truth for md in the current way I do blog posts, will hopefully be fixed with proper md rendering.</li>
+<li><input type="checkbox" disabled="" /> Actually good logs with color, status, etc.</li>
+<li><input type="checkbox" disabled="" /> Keep some elements loaded to avoid reading from disk every time.</li>
+<li><input type="checkbox" disabled="" /> Proper escaping from <code>{}, &quot;&quot;</code>, etc.</li>
+<li><input type="checkbox" disabled="" /> Check for circular deps.</li>
+<li><input type="checkbox" disabled="" /> Implement MD rendering (external lib) from .md files. Not needed tho maybe?</li>
+<li><input type="checkbox" disabled="" /> Look into testing (tons of edge cases)</li>
+<li><input type="checkbox" disabled="" /> OG Image and meta generation, especially for markdown posts</li>
+<li><input type="checkbox" disabled="" /> Give warnings for unused and not found components</li>
+<li><input type="checkbox" disabled="" /> CSS scoping in components but waiting for <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@scope">@scope general support</a> , so just use tailwind for now</li>
+<li><input type="checkbox" disabled="" /> Type safety-ish warnings when template doesn't match data</li>
+<li><input type="checkbox" disabled="" /> Cache what has changed with hashing so no need to rebuild if stuff is same. -&gt; can massively speed it up if lots of templating.</li>
+<li><input type="checkbox" disabled="" /> Improve flexibility w/ markdown syntax highlighting</li>
+<li><input type="checkbox" disabled="" /> Watcher or HMR (HMR is too complex so probably not) -&gt; livejs is not ideal and is quite broken rn.</li>
+<li><input type="checkbox" checked="" disabled="" /> <code>&lt;markdown&gt;</code> component</li>
+<li><input type="checkbox" checked="" disabled="" /> Commands such as <code>dev</code>, <code>build</code>, <code>new</code>.</li>
+<li><input type="checkbox" checked="" disabled="" /> Props and slots</li>
+<li><input type="checkbox" checked="" disabled="" /> The error handling is abysmal. Mainly due to me using unwrap(), Result type and ? everywhere. - more work to be done but it's in an ok state for now</li>
+<li><input type="checkbox" checked="" disabled="" /> Make it so it ignores commented out lines.</li>
+<li><input type="checkbox" checked="" disabled="" /> Speed tests.</li>
+<li><input type="checkbox" checked="" disabled="" /> Get templates working</li>
+<li><input type="checkbox" checked="" disabled="" /> Get components working</li>
+<li><input type="checkbox" checked="" disabled="" /> Copy files from /public to /dist</li>
+</ul>
+<p>In reality, it's just a lot of regexing and string manipulation. I've got the easy parts down, now it's up to me to keep going and implement the harder stuff. I've only spent around ~10 hours seriously working on this, and it's around 600 lines of rust at the moment.</p>
+<hr />
+<h1>Syntax</h1>
+<p>The file tree should look something like this:</p>
+<pre style="background-color:#3b3228;"><code class="language-rust"><span style="color:#d0c8c6;">example
+</span><span style="color:#d0c8c6;">└── src
+</span><span style="color:#d0c8c6;">    ├── components
+</span><span style="color:#d0c8c6;">    │  ├── Component.html
+</span><span style="color:#d0c8c6;">    │  └── Folder
+</span><span style="color:#d0c8c6;">    │     └── Component.html
+</span><span style="color:#d0c8c6;">    ├── data
+</span><span style="color:#d0c8c6;">    │  └── Something.json
+</span><span style="color:#d0c8c6;">    ├── pages
+</span><span style="color:#d0c8c6;">    │  ├── folder
+</span><span style="color:#d0c8c6;">    │  │  └── page.html
+</span><span style="color:#d0c8c6;">    │  └── index.html
+</span><span style="color:#d0c8c6;">    ├── public
+</span><span style="color:#d0c8c6;">    │  ├── image.png
+</span><span style="color:#d0c8c6;">    │  ├── folder
+</span><span style="color:#d0c8c6;">    │  │  └── image2.png
+</span><span style="color:#d0c8c6;">    └── templates
+</span><span style="color:#d0c8c6;">        └── Something.html
+</span></code></pre>
+<h3>Components</h3>
+<p>Components, and folders in /components must be in <code>PascalCase</code>. The first letter must be capitalized.</p>
+<p>To use a component:</p>
+<pre style="background-color:#3b3228;"><code class="language-html"><span style="color:#d0c8c6;">&lt;</span><span style="color:#cb6077;">Component</span><span style="color:#d0c8c6;"> /&gt;
+</span></code></pre>
+<p>It searches from /components, so if a component is in a subfolder do this:</p>
+<pre style="background-color:#3b3228;"><code class="language-html"><span style="color:#d0c8c6;">&lt;</span><span style="color:#cb6077;">Folder:Component</span><span style="color:#d0c8c6;"> /&gt;
+</span></code></pre>
+<p>so don't use <code>:</code> in your component or folder names.</p>
+<h3>Templates</h3>
+<p>The templates are stored in /templates, and the data for the corresponding template is in /data.</p>
+<p>A data file should have the same name as the template file. Keep in mind the template file is the one that's being repeated.</p>
+<p>To use:</p>
+<pre style="background-color:#3b3228;"><code class="language-html"><span style="color:#d0c8c6;">&lt;-{Template} /&gt;
+</span></code></pre>
+<p>And in templates/Template.html and data/Template.json,</p>
+<pre style="background-color:#3b3228;"><code class="language-html"><span style="color:#d0c8c6;">&lt;</span><span style="color:#cb6077;">p</span><span style="color:#d0c8c6;">&gt;${something}&lt;/</span><span style="color:#cb6077;">p</span><span style="color:#d0c8c6;">&gt;
+</span></code></pre>
+<p>Will match</p>
+<pre style="background-color:#3b3228;"><code class="language-json"><span style="color:#d0c8c6;">[{ &quot;</span><span style="color:#beb55b;">something</span><span style="color:#d0c8c6;">&quot;: &quot;</span><span style="color:#beb55b;">a</span><span style="color:#d0c8c6;">&quot; }, { &quot;</span><span style="color:#beb55b;">something</span><span style="color:#d0c8c6;">&quot;: &quot;</span><span style="color:#beb55b;">b</span><span style="color:#d0c8c6;">&quot; }]
+</span></code></pre>
+<p>You can use components in templates and vice versa. It recursively resolves each one so if a lot of places use a component it could become inefficient because it reads from disk every time. It also doesn't halt on circular dependencies (yet!).</p>
+<p>It also works with tailwind:</p>
+<pre style="background-color:#3b3228;"><code class="language-sh"><span style="color:#8ab3b5;">bunx</span><span style="color:#d0c8c6;"> tailwindcss</span><span style="color:#cb6077;"> -i</span><span style="color:#d0c8c6;"> ./src/public/input.css</span><span style="color:#cb6077;"> -o</span><span style="color:#d0c8c6;"> ./src/public/output.css</span><span style="color:#cb6077;"> --watch
+</span></code></pre>
+<hr />
+<p>I tried to build it with minimal dependencies.</p>
+<ol>
+<li><code>comrak</code> → markdown parser.</li>
+<li><code>fancy-regex</code> → Regex for negative lookbehind/lookahead for comments.</li>
+<li><code>notify</code> → File watcher to rebuild during <code>simple dev</code>.</li>
+<li><code>rouille</code> → Web server to serve <code>dist</code> during <code>simple dev</code>.</li>
+<li><code>serde_json</code> → JSON deserialization for data.json parsing.</li>
+</ol>
+<p>After all, it's too simple to warrant a large number of dependencies.</p>
+<hr />
+<p>Of course there's no reactivity, though I would like to build my own framework with reactivity someday. That's why I called this an &quot;assembler&quot; and not a &quot;framework&quot;. Not much logic here. It also feels surprisingly fast in dev when I save and see the changes, but I haven't tested it with a lot of components yet.</p>
+<p>You can view the source code <a href="https://github.com/Tnixc/simple">here</a>(it's really bad).</p>
 
 </slot>
 </article>
 </slot>
-            <div class="sm:py-20 py-6 font-mono flex justify-between flex-wrap">
-    <div class="gap-4 flex">
+            <div class="sm:py-20 py-6 font-mono flex justify-between flex-col gap-4">
+    <div class="justify-between flex md:flex-row flex-col gap-3">
         <a
             href="https://github.com/Tnixc"
-            class="hover:underline underline-offset-[6px] decoration-2 flex"
+            class="hover:underline underline-offset-[6px] decoration-2 flex w-fit whitespace-nowrap"
             target="_blank"
             >[github]<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
     <path
@@ -334,7 +455,7 @@
 </a>
         <a
             href="https://x.com/_Tnixc"
-            class="hover:underline underline-offset-[6px] decoration-2 flex"
+            class="hover:underline underline-offset-[6px] decoration-2 flex w-fit whitespace-nowrap"
             target="_blank"
             >[twitter]<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
     <path
@@ -343,19 +464,15 @@
     />
 </svg>
 </a>
+            <span class=" whitespace-nowrap">@Tnixc on discord</span>
+            <span class=" whitespace-nowrap">tnixxc@gmail.com</span>
     </div>
-    <div class="gap-4 flex">
+    <div class="gap-4 flex text-neutral-500 justify-end w-full">
         <a
             href="https://cloud.umami.is/share/o4Mje48LZ8anrxZi/tnixc.space"
             class="hover:underline underline-offset-[6px] decoration-2 flex"
             target="_blank"
-            >[analytics]<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-    <path
-        fill="currentColor"
-        d="M6 7c0 .55.45 1 1 1h7.59l-8.88 8.88a.996.996 0 1 0 1.41 1.41L16 9.41V17c0 .55.45 1 1 1s1-.45 1-1V7c0-.55-.45-1-1-1H7c-.55 0-1 .45-1 1"
-    />
-</svg>
-</a>
+            >[about this site]</a>
         <a
             href="https://github.com/Tnixc/website-v6"
             class="hover:underline underline-offset-[6px] decoration-2 flex"
@@ -368,7 +485,6 @@
 </svg>
 </a>
     </div>
-
 </div>
 
         </main>

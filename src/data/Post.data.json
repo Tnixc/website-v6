@@ -4,5 +4,17 @@
         "description": "I should have just used Astro.",
         "link": "./content/simple.html",
         "date": "18/07/2024"
+    },
+    {
+        "title": "The history of tnixc.space",
+        "description": "I'm not proud of what it was, but I'm proud of how far its come.",
+        "link": "./content/history.html",
+        "date": "18/07/2024"
+    },
+    {
+        "title": "About this site",
+        "description": "No javascript used",
+        "link": "./content/about.html",
+        "date": "18/07/2024"
     }
 ]

@@ -3,9 +3,10 @@
     <p class="text-neutral-700 py-3">${description}</p>
     <div class="flex justify-between">
         <a
-            class="bg-amber-300/60 hover:underline decoration-2 underline-offset-[6px]"
+            class="bg-amber-300/60 hover:underline decoration-2 underline-offset-[6px] flex w-fit"
             href="${link}"
-            >${link}</a
+            >[${link}]<Svg:ArrowUpRight class="w-4 h-4"
+        /></a
         >
         <span class="font-mono">${tags}</span>
     </div>
