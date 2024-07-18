@@ -119,4 +119,7 @@
     img {
         @apply mx-auto py-4;
     }
+    input[type="checkbox"] {
+        @apply accent-black;
+    }
 }
