@@ -2,31 +2,31 @@
     {
         "title": "simple",
         "description": "A simple web-component-ish assembler written in rust that's built basically only using regex to assemble static sites with markdown rendering. I wrote it just for this website. There's a blog post about it here. This is the one project I actually do really want to work on for a long time.",
-        "link": "https://github.com/Tnixc/simple",
+        "link": "Tnixc/simple",
         "tags": "rust/cli"
     },
     {
         "title": "lightscrape-rs",
         "description": "A cli that asynchronously downloads websites that host light novels from a given url, parses it, and compiles it into an epub. It's written in rust and I wrote it because I wanted to read webnovels offline",
-        "link": "https://github.com/Tnixc/lightscrape-rs",
+        "link": "Tnixc/lightscrape-rs",
         "tags": "rust/cli"
     },
     {
         "title": "tokyo",
         "description": "A color theme based off of the foreground colors of tokyo-night and the background color of catppuccin macchiato. I made it because I found catppuccin macchiato too desaturated. It mainly consists of catppuccin themes that I used replacer on to replace the hex codes.",
-        "link": "https://github.com/Tnixc/tokyo",
+        "link": "Tnixc/tokyo",
         "tags": "theme"
     },
     {
         "title": "replacer",
         "description": "A nice and simple cli that reads a toml file of pairs and recursively goes through every file, I wrote it for the purpose of generathing themes for tokyo.",
-        "link": "https://github.com/Tnixc/replacer",
+        "link": "Tnixc/replacer",
         "tags": "rust/cli"
     },
     {
         "title": "dotfiles",
         "description": "My dotfiles for my macOS setup, currently switching to nix-darwin, and always changing. I try not to spend too much time on it nowadays tho. Still need to get a decent nvim config up and running, but Zed is just too nice.",
-        "link": "https://github.com/Tnixc/dots",
+        "link": "Tnixc/dots",
         "tags": ""
     }
 ]
