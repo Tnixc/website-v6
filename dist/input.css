@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: "basier_square_monoregular";
+        src: url("./fonts/basiersquaremono-regular-webfont.woff2") format("woff2");
+        font-weight: normal;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: "InterVariable";
+        font-style: normal;
+        font-weight: 100 900;
+        font-display: swap;
+        src:
+            local("Inter"),
+            url("./fonts/InterVariable.woff2") format("woff2");
+    }
+    @font-face {
+        font-family: "InterVariable";
+        font-style: italic;
+        font-weight: 100 900;
+        font-display: swap;
+        src: url("./fonts/InterVariable-Italic.woff2") format("woff2");
+    }
+}
+
+.prose-hl {
+    h1 {
+        @apply text-xl font-semibold pt-7;
+    }
+    p {
+        @apply text-neutral-800 pt-3 leading-relaxed;
+    }
+    strong {
+        @apply not-italic font-semibold bg-amber-300/60;
+    }
+    em {
+        @apply not-italic underline underline-offset-2 decoration-2;
+    }
+    a {
+        @apply hover:underline underline-offset-4 decoration-2;
+    }
+}
+
+pre *{
+    filter: saturate(1.9);
+}
+pre {
+    background-color: #e4e5e4 !important;
+    @apply p-4 px-5 overflow-scroll rounded-md;
+}

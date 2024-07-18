@@ -1,0 +1,375 @@
+<html lang="en">
+    <head>
+<script>
+/*
+ Live.js - One script closer to Designing in the Browser
+ Written for Handcraft.com by Martin Kool (@mrtnkl).
+
+ Version 4.
+ Recent change: Made stylesheet and mimetype checks case insensitive.
+
+ http://livejs.com
+ http://livejs.com/license (MIT)
+ @livejs
+
+ Include live.js#css to monitor css changes only.
+ Include live.js#js to monitor js changes only.
+ Include live.js#html to monitor html changes only.
+ Mix and match to monitor a preferred combination such as live.js#html,css
+
+ By default, just include live.js to monitor all css, js and html changes.
+
+ Live.js can also be loaded as a bookmarklet. It is best to only use it for CSS then,
+ as a page reload due to a change in html or css would not re-include the bookmarklet.
+ To monitor CSS and be notified that it has loaded, include it as: live.js#css,notify
+*/
+(function () {
+
+ var headers = { "Etag": 1, "Last-Modified": 1, "Content-Length": 1, "Content-Type": 1 },
+     resources = {},
+     pendingRequests = {},
+     currentLinkElements = {},
+     oldLinkElements = {},
+     interval = 100,
+     loaded = false,
+     active = { "html": 1, "css": 1, "js": 1 };
+
+ var Live = {
+
+   // performs a cycle per interval
+   heartbeat: function () {
+     if (document.body) {
+       // make sure all resources are loaded on first activation
+       if (!loaded) Live.loadresources();
+       Live.checkForChanges();
+     }
+     setTimeout(Live.heartbeat, interval);
+   },
+
+   // loads all local css and js resources upon first activation
+   loadresources: function () {
+
+     // helper method to assert if a given url is local
+     function isLocal(url) {
+       var loc = document.location,
+           reg = new RegExp("^\\.|^\/(?!\/)|^[\\w]((?!://).)*$|" + loc.protocol + "//" + loc.host);
+       return url.match(reg);
+     }
+
+     // gather all resources
+     var scripts = document.getElementsByTagName("script"),
+         links = document.getElementsByTagName("link"),
+         uris = [];
+
+     // track local js urls
+     for (var i = 0; i < scripts.length; i++) {
+       var script = scripts[i], src = script.getAttribute("src");
+       if (src && isLocal(src))
+         uris.push(src);
+       if (src && src.match(/\blive.js#/)) {
+         for (var type in active)
+           active[type] = src.match("[#,|]" + type) != null
+         if (src.match("notify"))
+           alert("Live.js is loaded.");
+       }
+     }
+     if (!active.js) uris = [];
+     if (active.html) uris.push(document.location.href);
+
+     // track local css urls
+     for (var i = 0; i < links.length && active.css; i++) {
+       var link = links[i], rel = link.getAttribute("rel"), href = link.getAttribute("href", 2);
+       if (href && rel && rel.match(new RegExp("stylesheet", "i")) && isLocal(href)) {
+         uris.push(href);
+         currentLinkElements[href] = link;
+       }
+     }
+
+     // initialize the resources info
+     for (var i = 0; i < uris.length; i++) {
+       var url = uris[i];
+       Live.getHead(url, function (url, info) {
+         resources[url] = info;
+       });
+     }
+
+     // add rule for morphing between old and new css files
+     var head = document.getElementsByTagName("head")[0],
+         style = document.createElement("style"),
+         rule = "transition: all .3s ease-out;"
+     css = [".livejs-loading * { ", rule, " -webkit-", rule, "-moz-", rule, "-o-", rule, "}"].join('');
+     style.setAttribute("type", "text/css");
+     head.appendChild(style);
+     style.styleSheet ? style.styleSheet.cssText = css : style.appendChild(document.createTextNode(css));
+
+     // yep
+     loaded = true;
+   },
+
+   // check all tracking resources for changes
+   checkForChanges: function () {
+     for (var url in resources) {
+       if (pendingRequests[url])
+         continue;
+
+       Live.getHead(url, function (url, newInfo) {
+         var oldInfo = resources[url],
+             hasChanged = false;
+         resources[url] = newInfo;
+         for (var header in oldInfo) {
+           // do verification based on the header type
+           var oldValue = oldInfo[header],
+               newValue = newInfo[header],
+               contentType = newInfo["Content-Type"];
+           switch (header.toLowerCase()) {
+             case "etag":
+               if (!newValue) break;
+               // fall through to default
+             default:
+               hasChanged = oldValue != newValue;
+               break;
+           }
+           // if changed, act
+           if (hasChanged) {
+             Live.refreshResource(url, contentType);
+             break;
+           }
+         }
+       });
+     }
+   },
+
+   // act upon a changed url of certain content type
+   refreshResource: function (url, type) {
+     switch (type.toLowerCase()) {
+       // css files can be reloaded dynamically by replacing the link element
+       case "text/css":
+         var link = currentLinkElements[url],
+             html = document.body.parentNode,
+             head = link.parentNode,
+             next = link.nextSibling,
+             newLink = document.createElement("link");
+
+         html.className = html.className.replace(/\s*livejs\-loading/gi, '') + ' livejs-loading';
+         newLink.setAttribute("type", "text/css");
+         newLink.setAttribute("rel", "stylesheet");
+         newLink.setAttribute("href", url + "?now=" + new Date() * 1);
+         next ? head.insertBefore(newLink, next) : head.appendChild(newLink);
+         currentLinkElements[url] = newLink;
+         oldLinkElements[url] = link;
+
+         // schedule removal of the old link
+         Live.removeoldLinkElements();
+         break;
+
+       // check if an html resource is our current url, then reload
+       case "text/html":
+         if (url != document.location.href)
+           return;
+
+         // local javascript changes cause a reload as well
+       case "text/javascript":
+       case "application/javascript":
+       case "application/x-javascript":
+         document.location.reload();
+     }
+   },
+
+   // removes the old stylesheet rules only once the new one has finished loading
+   removeoldLinkElements: function () {
+     var pending = 0;
+     for (var url in oldLinkElements) {
+       // if this sheet has any cssRules, delete the old link
+       try {
+         var link = currentLinkElements[url],
+             oldLink = oldLinkElements[url],
+             html = document.body.parentNode,
+             sheet = link.sheet || link.styleSheet,
+             rules = sheet.rules || sheet.cssRules;
+         if (rules.length >= 0) {
+           oldLink.parentNode.removeChild(oldLink);
+           delete oldLinkElements[url];
+           setTimeout(function () {
+             html.className = html.className.replace(/\s*livejs\-loading/gi, '');
+           }, 100);
+         }
+       } catch (e) {
+         pending++;
+       }
+       if (pending) setTimeout(Live.removeoldLinkElements, 50);
+     }
+   },
+
+   // performs a HEAD request and passes the header info to the given callback
+   getHead: function (url, callback) {
+     pendingRequests[url] = true;
+     var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XmlHttp");
+     xhr.open("HEAD", url, true);
+     xhr.onreadystatechange = function () {
+       delete pendingRequests[url];
+       if (xhr.readyState == 4 && xhr.status != 304) {
+         xhr.getAllResponseHeaders();
+         var info = {};
+         for (var h in headers) {
+           var value = xhr.getResponseHeader(h);
+           // adjust the simple Etag variant to match on its significant part
+           if (h.toLowerCase() == "etag" && value) value = value.replace(/^W\//, '');
+           if (h.toLowerCase() == "content-type" && value) value = value.replace(/^(.*?);.*?$/i, "$1");
+           info[h] = value;
+         }
+         callback(url, info);
+       }
+     }
+     xhr.send();
+   }
+ };
+
+ // start listening
+ if (document.location.protocol != "file:") {
+   if (!window.liveJsLoaded)
+     Live.heartbeat();
+
+   window.liveJsLoaded = true;
+ }
+ else if (window.console)
+   console.log("Live.js doesn't support the file protocol. It needs http.");
+})();
+</script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./output.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <title>tnixc.space</title>
+</head>
+
+    <body
+        class="bg-neutral-300 flex sm:flex-row flex-col sm:pt-56 sm:p-10 p-2 justify-center selection:bg-stone-400/60"
+    >
+        <div class="font-mono flex flex-col gap-8 p-6 h-fit">
+    <a href="./index.html"><svg class="w-36 h-auto" width="89" height="35" viewBox="0 0 89 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="mask0_11_75" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="89" height="35">
+<rect x="0.0601501" y="0.939636" width="88.781" height="33.5152" fill="#D9D9D9" style="fill:#D9D9D9;fill:color(display-p3 0.8510 0.8510 0.8510);fill-opacity:1;"/>
+</mask>
+<g mask="url(#mask0_11_75)">
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 -19.05 21.1216)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 -16.0338 23.7489)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 -13.0176 26.3761)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 -10.0014 29.0034)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 -6.98517 31.6306)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 -3.96893 34.2578)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 -0.952698 36.8851)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 2.06351 39.5123)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 5.07974 42.1396)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 8.09595 44.7668)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 11.1122 47.394)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 14.1284 50.0213)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 17.1446 52.6485)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 20.1609 55.2758)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 23.1771 57.903)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 26.1933 60.5303)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 29.2095 63.1575)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 32.2257 65.7847)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 35.242 68.412)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 38.2582 71.0392)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 41.2744 73.6665)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 44.2906 76.2937)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 47.3069 78.921)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 50.3231 81.5482)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 53.3393 84.1754)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 56.3555 86.8027)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 59.3718 89.4299)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 62.388 92.0572)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 65.4042 94.6844)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+<line y1="-0.65" x2="104.175" y2="-0.65" transform="matrix(0.754056 -0.65681 0.754056 0.65681 68.4204 97.3116)" stroke="black" stroke-opacity="0.1" style="stroke:black;stroke-opacity:0.1;" stroke-width="1.3"/>
+</g>
+<path d="M10.0968 22.0113L75.3584 22.0113" stroke="black" style="stroke:black;stroke-opacity:1;" stroke-miterlimit="1.5" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M78.8045 22.0113C74.4106 22.0113 71.4045 25.1395 70.7346 30.3989" stroke="black" style="stroke:black;stroke-opacity:1;" stroke-miterlimit="1.5" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M78.8045 22.0114C74.4106 22.0114 71.4045 18.8832 70.7346 13.6238" stroke="black" style="stroke:black;stroke-opacity:1;" stroke-miterlimit="1.5" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M60.5722 28.7512C64.2945 28.7512 67.312 25.7336 67.312 22.0113C67.312 18.2891 64.2945 15.2715 60.5722 15.2715C56.8499 15.2715 53.8324 18.2891 53.8324 22.0113C53.8324 25.7336 56.8499 28.7512 60.5722 28.7512Z" stroke="black" style="stroke:black;stroke-opacity:1;" stroke-miterlimit="1.5" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M12.7684 19.6822V11.8691H10.0968V10.861H16.5489V11.8691H13.8773V19.6822H12.7684Z" fill="black" style="fill:black;fill-opacity:1;"/>
+<path d="M18.2771 19.6822V10.861H19.4743L22.8516 17.5399H22.902V10.861H23.9857V19.6822H22.776L19.3987 13.0411H19.3483V19.6822H18.2771Z" fill="black" style="fill:black;fill-opacity:1;"/>
+<path d="M26.1928 19.6822V18.7371H28.3603V11.8061H26.1928V10.861H31.6368V11.8061H29.4693V18.7371H31.6368V19.6822H26.1928Z" fill="black" style="fill:black;fill-opacity:1;"/>
+<path d="M33.7053 19.6822V19.5562L35.9862 15.2716V15.2212L33.7935 10.987V10.861H34.9024L36.7045 14.4525H36.7549L38.557 10.861H39.6659V10.987L37.4732 15.2212V15.2716L39.7541 19.5562V19.6822H38.6452L36.7549 16.1537H36.7045L34.8142 19.6822H33.7053Z" fill="black" style="fill:black;fill-opacity:1;"/>
+<path d="M44.6076 19.7956C42.3141 19.7956 41.3941 17.9558 41.3941 15.2716C41.3941 12.5496 42.3393 10.7475 44.6076 10.7475C46.6113 10.7475 47.506 11.9447 47.695 13.8098H46.5609C46.4475 12.5496 45.9812 11.7809 44.6076 11.7809C42.8055 11.7809 42.5283 13.4947 42.5283 15.2716C42.5283 17.0484 42.8055 18.7749 44.6076 18.7749C45.9182 18.7749 46.3592 18.0314 46.5735 16.8216H47.695C47.4556 18.6363 46.5987 19.7956 44.6076 19.7956Z" fill="black" style="fill:black;fill-opacity:1;"/>
+</svg>
+</a>
+    <div class="flex flex-col gap-5 pl-2">
+        <a class="hover:underline underline-offset-4 w-fit decoration-2" href="./index.html">about me</a>
+        <a class="hover:underline underline-offset-4 w-fit decoration-2" href="./projects.html">projects</a>
+        <a class="hover:underline underline-offset-4 w-fit decoration-2" href="./writing.html">writing</a>
+        <a class="hover:underline underline-offset-4 w-fit decoration-2" href="./random.html">random</a>
+    </div>
+</div>
+
+        <main class="md:max-w-screen-md w-full p-6 inv">
+            <slot>
+    <svg class="h-12 w-auto" width="73" height="28" viewBox="0 0 73 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.34 27C1.004 27 0.835999 26.88 0.835999 26.64C0.835999 26.4 1.028 26.244 1.412 26.172L2.924 25.92C3.404 25.848 3.764 25.728 4.004 25.56C4.244 25.368 4.412 25.02 4.508 24.516L9.512 2.91599C9.584 2.57999 9.548 2.33999 9.404 2.19599C9.284 2.05199 8.996 1.97999 8.54 1.97999C7.724 1.97999 6.824 2.31599 5.84 2.98799C4.88 3.63599 4.016 4.85999 3.248 6.65999L2.672 8.02799C2.552 8.33999 2.348 8.49599 2.06 8.49599C1.724 8.49599 1.616 8.29199 1.736 7.88399L3.536 1.36799C3.68 0.815993 3.944 0.539993 4.328 0.539993C4.544 0.539993 4.712 0.587993 4.832 0.683994C4.976 0.755993 5.204 0.839992 5.516 0.935992C5.828 1.03199 6.368 1.07999 7.136 1.07999H15.164C15.932 1.07999 16.496 1.03199 16.856 0.935992C17.24 0.839992 17.516 0.755993 17.684 0.683994C17.876 0.587993 18.044 0.539993 18.188 0.539993C18.596 0.539993 18.74 0.815993 18.62 1.36799L17.468 7.88399C17.396 8.29199 17.192 8.49599 16.856 8.49599C16.544 8.49599 16.412 8.33999 16.46 8.02799L16.532 7.12799C16.676 5.35199 16.448 4.05599 15.848 3.23999C15.248 2.39999 14.408 1.97999 13.328 1.97999C12.872 1.97999 12.548 2.05199 12.356 2.19599C12.188 2.33999 12.068 2.57999 11.996 2.91599L6.992 24.516C6.872 25.02 6.884 25.368 7.028 25.56C7.196 25.728 7.508 25.848 7.964 25.92L9.656 26.172C9.92 26.196 10.052 26.328 10.052 26.568C10.052 26.856 9.86 27 9.476 27H1.34Z" fill="black" style="fill:black;fill-opacity:1;"/>
+<path d="M16.6228 26.532L20.0428 12.168C20.1628 11.64 20.1748 11.232 20.0788 10.944C20.0068 10.632 19.7908 10.476 19.4308 10.476C18.9988 10.476 18.5188 10.8 17.9908 11.448C17.4868 12.072 16.9108 13.272 16.2628 15.048C16.1668 15.36 15.9988 15.516 15.7588 15.516C15.3988 15.516 15.3028 15.3 15.4708 14.868C15.9988 13.212 16.5508 11.916 17.1268 10.98C17.7268 10.044 18.3268 9.38399 18.9268 8.99999C19.5268 8.61599 20.0788 8.42399 20.5828 8.42399C21.3748 8.42399 21.9388 8.72399 22.2748 9.32399C22.6108 9.89999 22.6228 10.86 22.3108 12.204L21.4108 16.092C21.3868 16.26 21.4228 16.356 21.5188 16.38C21.6148 16.404 21.6988 16.344 21.7708 16.2C22.7068 14.256 23.6068 12.72 24.4708 11.592C25.3348 10.44 26.1508 9.62399 26.9188 9.14399C27.6868 8.66399 28.3828 8.42399 29.0068 8.42399C29.8948 8.42399 30.5428 8.78399 30.9508 9.50399C31.3588 10.224 31.3588 11.328 30.9508 12.816L28.2148 23.256C28.0468 23.928 28.0348 24.432 28.1788 24.768C28.3228 25.104 28.5868 25.272 28.9708 25.272C29.4508 25.272 29.9188 24.96 30.3748 24.336C30.8548 23.688 31.3468 22.476 31.8508 20.7C31.9228 20.436 32.0788 20.304 32.3188 20.304C32.5108 20.304 32.6188 20.376 32.6428 20.52C32.6908 20.664 32.6908 20.832 32.6428 21.024C32.1868 22.656 31.6948 23.94 31.1668 24.876C30.6388 25.788 30.0988 26.424 29.5468 26.784C29.0188 27.144 28.4788 27.324 27.9268 27.324C27.0628 27.324 26.4148 26.964 25.9828 26.244C25.5508 25.524 25.5268 24.408 25.9108 22.896L28.6828 12.456C28.9468 11.52 28.9828 10.872 28.7908 10.512C28.6228 10.152 28.3708 9.97199 28.0348 9.97199C27.5068 9.97199 26.9068 10.308 26.2348 10.98C25.5628 11.628 24.8788 12.528 24.1828 13.68C23.4868 14.808 22.8028 16.092 22.1308 17.532C21.4588 18.972 20.8468 20.472 20.2948 22.032C19.7668 23.592 19.3348 25.116 18.9988 26.604C18.9268 26.868 18.7588 27 18.4948 27H17.0188C16.6828 27 16.5508 26.844 16.6228 26.532Z" fill="black" style="fill:black;fill-opacity:1;"/>
+<path d="M40.8323 5.21999C40.3763 5.21999 39.9923 5.06399 39.6803 4.75199C39.3923 4.41599 39.2483 4.01999 39.2483 3.56399C39.2483 2.91599 39.4403 2.39999 39.8243 2.01599C40.2323 1.63199 40.6883 1.43999 41.1923 1.43999C41.6723 1.43999 42.0683 1.59599 42.3803 1.90799C42.7163 2.19599 42.8843 2.57999 42.8843 3.05999C42.8843 3.73199 42.6803 4.25999 42.2723 4.64399C41.8643 5.02799 41.3843 5.21999 40.8323 5.21999ZM37.8803 27.36C37.0883 27.36 36.5243 27.072 36.1883 26.496C35.8523 25.896 35.8403 24.924 36.1523 23.58L38.8163 12.168C38.9363 11.64 38.9483 11.232 38.8523 10.944C38.7803 10.632 38.5643 10.476 38.2043 10.476C37.7723 10.476 37.2923 10.8 36.7643 11.448C36.2603 12.072 35.6843 13.272 35.0363 15.048C34.9403 15.36 34.7723 15.516 34.5323 15.516C34.1723 15.516 34.0763 15.3 34.2443 14.868C34.7723 13.212 35.3243 11.916 35.9003 10.98C36.5003 10.044 37.1003 9.38399 37.7003 8.99999C38.3003 8.61599 38.8523 8.42399 39.3563 8.42399C40.1963 8.42399 40.7843 8.72399 41.1203 9.32399C41.4563 9.89999 41.4683 10.86 41.1563 12.204L38.4923 23.616C38.3723 24.144 38.3483 24.564 38.4203 24.876C38.5163 25.164 38.7443 25.308 39.1043 25.308C39.5363 25.308 40.0043 24.996 40.5083 24.372C41.0363 23.724 41.6243 22.512 42.2723 20.736C42.3683 20.424 42.5363 20.268 42.7763 20.268C43.1363 20.268 43.2323 20.484 43.0643 20.916C42.5603 22.548 41.9963 23.844 41.3723 24.804C40.7723 25.74 40.1723 26.4 39.5723 26.784C38.9723 27.168 38.4083 27.36 37.8803 27.36Z" fill="black" style="fill:black;fill-opacity:1;"/>
+<path d="M45.0474 27.36C44.3754 27.36 43.8714 27.18 43.5354 26.82C43.1754 26.436 42.9954 25.944 42.9954 25.344C42.9954 24.792 43.1394 24.336 43.4274 23.976C43.6914 23.616 44.0514 23.436 44.5074 23.436C44.8914 23.436 45.1674 23.532 45.3354 23.724C45.5274 23.916 45.6714 24.144 45.7674 24.408C45.8634 24.648 45.9714 24.864 46.0914 25.056C46.2114 25.248 46.4034 25.344 46.6674 25.344C47.2674 25.344 47.9034 24.696 48.5754 23.4C49.2714 22.104 49.9314 20.448 50.5554 18.432C50.6754 18.096 50.7474 17.796 50.7714 17.532C50.7954 17.268 50.7954 16.968 50.7714 16.632L50.4834 12.168C50.4594 11.544 50.3514 11.112 50.1594 10.872C49.9674 10.608 49.7274 10.476 49.4394 10.476C48.9114 10.476 48.4074 10.8 47.9274 11.448C47.4474 12.072 47.0514 13.272 46.7394 15.048C46.6674 15.36 46.5114 15.516 46.2714 15.516C45.9354 15.516 45.8034 15.3 45.8754 14.868C46.1634 13.212 46.5594 11.916 47.0634 10.98C47.5914 10.044 48.1434 9.38399 48.7194 8.99999C49.3194 8.61599 49.8714 8.42399 50.3754 8.42399C51.1194 8.42399 51.6954 8.68799 52.1034 9.21599C52.5354 9.71999 52.7874 10.596 52.8594 11.844L52.9674 13.536C52.9914 13.68 53.0514 13.764 53.1474 13.788C53.2674 13.788 53.3634 13.716 53.4354 13.572C54.2994 11.676 55.1274 10.344 55.9194 9.57599C56.7354 8.80799 57.5874 8.42399 58.4754 8.42399C59.1474 8.42399 59.6514 8.61599 59.9874 8.99999C60.3474 9.35999 60.5274 9.83999 60.5274 10.44C60.5274 10.992 60.3954 11.448 60.1314 11.808C59.8674 12.168 59.4954 12.348 59.0154 12.348C58.6314 12.348 58.3434 12.252 58.1514 12.06C57.9834 11.868 57.8514 11.652 57.7554 11.412C57.6594 11.148 57.5514 10.92 57.4314 10.728C57.3354 10.536 57.1674 10.44 56.9274 10.44C56.5674 10.44 56.1594 10.716 55.7034 11.268C55.2474 11.796 54.8154 12.504 54.4074 13.392C53.9994 14.28 53.6634 15.264 53.3994 16.344C53.3274 16.68 53.2794 16.98 53.2554 17.244C53.2554 17.508 53.2674 17.808 53.2914 18.144L53.6154 23.4C53.6634 24.144 53.7954 24.672 54.0114 24.984C54.2274 25.296 54.5154 25.452 54.8754 25.452C55.3314 25.452 55.7994 25.116 56.2794 24.444C56.7594 23.748 57.1554 22.512 57.4674 20.736C57.5394 20.424 57.7074 20.268 57.9714 20.268C58.2594 20.268 58.3794 20.484 58.3314 20.916C58.1154 22.548 57.7674 23.832 57.2874 24.768C56.8314 25.704 56.3274 26.364 55.7754 26.748C55.2234 27.132 54.6954 27.324 54.1914 27.324C53.3034 27.324 52.6194 27.048 52.1394 26.496C51.6594 25.92 51.3714 24.948 51.2754 23.58L51.0954 20.88C51.0714 20.712 51.0114 20.628 50.9154 20.628C50.8194 20.628 50.7354 20.7 50.6634 20.844L50.0154 22.428C48.6474 25.716 46.9914 27.36 45.0474 27.36Z" fill="black" style="fill:black;fill-opacity:1;"/>
+<path d="M64.5456 27.324C63.2256 27.324 62.1336 26.784 61.2696 25.704C60.4056 24.6 59.9736 23.196 59.9736 21.492C59.9736 19.884 60.2256 18.312 60.7296 16.776C61.2576 15.216 61.9536 13.812 62.8176 12.564C63.7056 11.292 64.6776 10.284 65.7336 9.53999C66.8136 8.79599 67.8936 8.42399 68.9736 8.42399C70.1256 8.42399 71.0976 8.73599 71.8896 9.35999C72.0096 9.45599 72.0816 9.53999 72.1056 9.61199C72.1296 9.65999 72.1176 9.77999 72.0696 9.97199L71.0976 14.688C71.0256 15.024 70.8696 15.192 70.6296 15.192C70.3656 15.192 70.2096 15.012 70.1616 14.652L69.9816 12.096C69.9096 10.992 69.7416 10.272 69.4776 9.93599C69.2376 9.59999 68.8776 9.43199 68.3976 9.43199C67.7256 9.43199 67.0416 9.76799 66.3456 10.44C65.6496 11.088 65.0016 11.976 64.4016 13.104C63.8256 14.208 63.3576 15.444 62.9976 16.812C62.6616 18.156 62.4936 19.524 62.4936 20.916C62.4936 23.94 63.4776 25.452 65.4456 25.452C66.3816 25.452 67.2216 25.02 67.9656 24.156C68.7336 23.292 69.4416 21.948 70.0896 20.124C70.1616 19.884 70.3296 19.764 70.5936 19.764C70.7376 19.764 70.8216 19.824 70.8456 19.944C70.8696 20.04 70.8456 20.244 70.7736 20.556C70.5336 21.876 70.1016 23.04 69.4776 24.048C68.8536 25.056 68.1096 25.86 67.2456 26.46C66.4056 27.036 65.5056 27.324 64.5456 27.324Z" fill="black" style="fill:black;fill-opacity:1;"/>
+</svg>
+
+    <p class="flex gap-2 pt-6 font-mono">
+        <span class="bg-neutral-400/30 p-1 px-2"><slot>he/him</slot></span>
+
+        <span class="bg-neutral-400/30 p-1 px-2"><slot>15 years old</slot></span>
+
+        <span class="bg-neutral-400/30 p-1 px-2"><slot>UTC+8 (HKT)</slot></span>
+
+    </p>
+    <!-- prettier-ignore -->
+    <div class="prose-hl">
+    <p>Hello! I'm a grade 12 highschool student from Hong Kong studing in Canada. I spend most of my time programming, reading, and watching anime. I draw sometimes as well. I want to learn a lot of things.</p>
+<h1>Work</h1>
+<p>I usually work with web technologies, but I've been doing a lot of stuff in rust recently too. The languages I'm most familiar are <strong>Rust, JavaScript/TypeScript, and Python</strong>. I use plenty of HTML/CSS too, and I have some domain specific experience with Java as well. I'm also looking to learning Go, Nix, and Zig in the future.</p>
+<p>I've used <strong>Vue, Nuxt, Svelte, Astro</strong>, and I would say I'm most familiar with Vue. And I'm never using react if I don't have to.</p>
+<p>I care deeply about UI, and I'd say design engineering is one of the roles I relate to the most.</p>
+<h1>Tools</h1>
+<p>I also work with a lot of tools. I use <strong>Zed</strong> (with vim mode enabled of course) as my primary editor. I'm also familiar with Figma, and I'm learning to use Blender. I also use a mix of apple reminders and notes, and mainly obsidian for note taking.</p>
+<p>For hardware, I run a <em>13&quot; M3 MacBook Air</em>, and a custom built PC(which I'm planning to switch to NixOS soon??). I'm pretty deep into the apple ecosystem, I've got an iPad for drawing and an iPhone and watch as well.</p>
+<h1>Hobbies</h1>
+<p>I don't play a lot of video games anymore (I enjoy programming more), but I used to be pretty into osu! and Minecraft. I've also enjoyed <em>Cyberpunk 2077, Divinity 2 Original Sin, Celeste, project sekai, and Hades</em>. I'm looking forward to playing Baldur's Gate 3 and Elden Ring at the moment. I also like arcade rhythm games like maimai DX and Wacca.</p>
+<p>I also listen to a lot of music. I like a lot of genres, but I mainly listen to J-Pop. Recently I've been listening to <em>Mili and Eve. Vocaloid, Laufey, breakcore, Porter Robinson, Madeon, and lots of game OSTs</em> also get a lot of playtime.</p>
+<p>Lastly, I also contribute to <a href="https://github.com/catppuccin">[catppuccin]</a> sometimes, and I hang out on its discord server.</p>
+
+    </div>
+    <p class="pt-10">
+        There's more of me at
+        <a class="font-mono hover:underline underline-offset-4 decoration-2" href="./random.html"
+            >[./random]</a
+        >.
+    </p>
+</slot>
+            <div class="gap-4 flex sm:py-20 py-6 font-mono">
+    <a
+        href="https://github.com/Tnixc"
+        class="hover:underline underline-offset-4 decoration-2 flex"
+        target="_blank"
+        >[github]<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+    <path
+        fill="currentColor"
+        d="M6 7c0 .55.45 1 1 1h7.59l-8.88 8.88a.996.996 0 1 0 1.41 1.41L16 9.41V17c0 .55.45 1 1 1s1-.45 1-1V7c0-.55-.45-1-1-1H7c-.55 0-1 .45-1 1"
+    />
+</svg>
+</a>
+    <a
+        href="https://x.com/_Tnixc"
+        class="hover:underline underline-offset-4 decoration-2 flex"
+        target="_blank"
+        >[twitter]<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+    <path
+        fill="currentColor"
+        d="M6 7c0 .55.45 1 1 1h7.59l-8.88 8.88a.996.996 0 1 0 1.41 1.41L16 9.41V17c0 .55.45 1 1 1s1-.45 1-1V7c0-.55-.45-1-1-1H7c-.55 0-1 .45-1 1"
+    />
+</svg>
+</a>
+</div>
+
+        </main>
+        <div class="lg:max-w-44 w-full max-w-0 transition-all duration-500"></div>
+    </body>
+</html>
+
