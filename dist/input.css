@@ -117,6 +117,6 @@
         @apply p-2 overflow-scroll rounded-md;
     }
     img {
-        @apply mx-auto h-96;
+        @apply mx-auto py-4;
     }
 }
