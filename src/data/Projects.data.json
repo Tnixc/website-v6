@@ -1,13 +1,19 @@
 [
     {
         "title": "simple",
-        "description": "A simple web-component-ish assembler written in rust that's built basically only using regex to assemble static sites with markdown rendering. I wrote it just for this website. There's a blog post about it here. This is the one project I actually do really want to work on for a long time.",
+        "description": "A simple web-component-ish assembler written in rust that's built basically only using regex to assemble static sites with markdown rendering. I wrote it just for this website. There's a blog post about it here titled 'Simple - Building a component-based static site assembler'. This is the one project I actually do really want to work on for a long time.",
         "link": "Tnixc/simple",
         "tags": "rust/cli"
     },
     {
         "title": "lightscrape-rs",
         "description": "A cli that asynchronously downloads websites that host light novels from a given url, parses it, and compiles it into an epub. It's written in rust and I wrote it because I wanted to read webnovels offline",
+        "link": "Tnixc/lightscrape-rs",
+        "tags": "rust/cli"
+    },
+    {
+        "title": "tnixc.space",
+        "description": "This very website. There's been lots of editions since the first one. There's a blog post covering all of them here titled 'The history of tnixc.space'.",
         "link": "Tnixc/lightscrape-rs",
         "tags": "rust/cli"
     },

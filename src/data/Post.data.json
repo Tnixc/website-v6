@@ -1,7 +1,7 @@
 [
     {
         "title": "Simple - Building a component-based static site assembler",
-        "description": "I should have just used Astro.",
+        "description": "I should have just used Astro. Also SPAs are faster.",
         "link": "./content/simple.html",
         "date": "18/07/2024"
     },
