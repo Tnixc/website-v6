@@ -1,7 +1,19 @@
-<a class="bg-neutral-400/20 p-4 block" href="${link}">
+<a class="bg-neutral-400/20 p-4 block post relative group" href="${link}">
     <h1 class="text-xl font-semibold">${title}</h1>
     <p class="text-neutral-700 pt-1">Published <span class="font-mono">${date}</span></p>
     <p class="text-neutral-700 pt-3">${description}</p>
-    <div class="flex justify-between">
+    <div
+        class="absolute right-0 top-1/2 -translate-y-1/2 h-28 bg-neutral-200/60 backdrop-blur-md aspect-square grid place-items-center border-4 border-dashed border-neutral-400 transition-all [clip-path:inset(0_0_0_100%)] group-hover:[clip-path:inset(0_0_0_0)]"
+    >
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512">
+            <path
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="48"
+                d="m268 112l144 144l-144 144m124-144H100"
+            />
+        </svg>
     </div>
 </a>

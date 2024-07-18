@@ -295,16 +295,17 @@
 </svg>
 </a>
     <div class="flex flex-col gap-5 pl-2">
-        <a class="hover:underline underline-offset-4 w-fit decoration-2" href="/index.html">about me</a>
-        <a class="hover:underline underline-offset-4 w-fit decoration-2" href="/projects.html">projects</a>
-        <a class="hover:underline underline-offset-4 w-fit decoration-2" href="/writing.html">writing</a>
-        <a class="hover:underline underline-offset-4 w-fit decoration-2" href="/random.html">random</a>
+        <a class="hover:underline underline-offset-[6px] w-fit decoration-2" href="/index.html">about me</a>
+        <a class="hover:underline underline-offset-[6px] w-fit decoration-2" href="/projects.html">projects</a>
+        <a class="hover:underline underline-offset-[6px] w-fit decoration-2" href="/writing.html">writing</a>
+        <a class="hover:underline underline-offset-[6px] w-fit decoration-2" href="/random.html">random</a>
     </div>
 </div>
 
         <main class="md:max-w-screen-md w-full p-6 inv">
             <slot>
-<h1 class="text-xl">Simple - Building a component-based static site assembler</h1>
+<a href="/writing.html" class="font-mono py-4 block w-fit underline-offset-[6px] decoration-2 hover:underline">[&lt;back]</a>
+<h1 class="text-2xl font-semibold">Simple - Building a component-based static site assembler</h1>
 <p class="text-neutral-500 pt-1">Published <span class="font-mono">18/07/2024</span></p>
 <p class="pt-3">I should have just used Astro.</p>
 <div class="py-8">
@@ -313,116 +314,7 @@
 <article class="prose">
 <slot>
     <!-- prettier-ignore -->
-    <h1>Example Markdown File</h1>
-<h2>Headings</h2>
-<h1>Heading 1</h1>
-<h2>Heading 2</h2>
-<h3>Heading 3</h3>
-<h4>Heading 4</h4>
-<h5>Heading 5</h5>
-<h6>Heading 6</h6>
-<h2>Paragraphs</h2>
-<p>This is a simple paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-<h2>Line Breaks</h2>
-<p>This is a paragraph
-with a line break.</p>
-<h2>Emphasis</h2>
-<p><em>Italic</em> text using asterisks.
-<em>Italic</em> text using underscores.
-<strong>Bold</strong> text using asterisks.
-<strong>Bold</strong> text using underscores.
-<em><strong>Bold and Italic</strong></em> text using asterisks.
-<em><strong>Bold and Italic</strong></em> text using underscores.</p>
-<h2>Blockquotes</h2>
-<blockquote>
-<p>This is a blockquote.
-It can span multiple lines.</p>
-</blockquote>
-<h2>Lists</h2>
-<h3>Unordered List</h3>
-<ul>
-<li>Item 1</li>
-<li>Item 2
-<ul>
-<li>Subitem 1</li>
-<li>Subitem 2</li>
-</ul>
-</li>
-<li>Item 3</li>
-</ul>
-<h3>Ordered List</h3>
-<ol>
-<li>First item</li>
-<li>Second item</li>
-<li>Third item</li>
-</ol>
-<h2>Links</h2>
-<p>This is a <a href="https://www.google.com">link to Google</a>.</p>
-<h2>Images</h2>
-<p><img src="https://markdown-here.com/img/icon256.png" alt="Markdown Logo" /></p>
-<h2>Code</h2>
-<h3>Inline Code</h3>
-<p>This is an example of <code>inline code</code>.</p>
-<h3>Code Block</h3>
-<pre style="background-color:#3b3228;"><code class="language-python"><span style="color:#a89bb9;">def </span><span style="color:#8ab3b5;">hello_world</span><span style="color:#d0c8c6;">():
-</span><span style="color:#d0c8c6;">    </span><span style="color:#7bbda4;">print</span><span style="color:#d0c8c6;">(&quot;</span><span style="color:#beb55b;">Hello, World!</span><span style="color:#d0c8c6;">&quot;)
-</span></code></pre>
-<h3>Syntax Highlighting</h3>
-<pre style="background-color:#3b3228;"><code class="language-javascript"><span style="color:#a89bb9;">function </span><span style="color:#8ab3b5;">greet</span><span style="color:#d0c8c6;">(name) {
-</span><span style="color:#d0c8c6;">    </span><span style="color:#a89bb9;">return </span><span style="color:#d0c8c6;">`</span><span style="color:#beb55b;">Hello, </span><span style="color:#d0c8c6;">${</span><span style="color:#cb6077;">name</span><span style="color:#d0c8c6;">}</span><span style="color:#beb55b;">!</span><span style="color:#d0c8c6;">`;
-</span><span style="color:#d0c8c6;">}
-</span></code></pre>
-<h2>Tables</h2>
-<table>
-<thead>
-<tr>
-<th>Header 1</th>
-<th>Header 2</th>
-<th>Header 3</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Row 1</td>
-<td>Data</td>
-<td>More Data</td>
-</tr>
-<tr>
-<td>Row 2</td>
-<td>Data</td>
-<td>More Data</td>
-</tr>
-<tr>
-<td>Row 3</td>
-<td>Data</td>
-<td>More Data</td>
-</tr>
-</tbody>
-</table>
-<h2>Horizontal Rule</h2>
-<hr />
-<hr />
-<hr />
-<h2>Task Lists</h2>
-<ul>
-<li><input type="checkbox" checked="" disabled="" /> Task 1</li>
-<li><input type="checkbox" disabled="" /> Task 2</li>
-<li><input type="checkbox" disabled="" /> Task 3</li>
-</ul>
-<h2>Footnotes</h2>
-<p>This is a sentence with a footnote.<sup class="footnote-ref"><a href="#fn-1" id="fnref-1" data-footnote-ref>1</a></sup></p>
-<h2>Math</h2>
-<p><span data-math-style="display">
-\frac{h}{2}
-</span></p>
-<p>hello world/end</p>
-<section class="footnotes" data-footnotes>
-<ol>
-<li id="fn-1">
-<p>This is the footnote text. <a href="#fnref-1" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="1" aria-label="Back to reference 1">↩</a></p>
-</li>
-</ol>
-</section>
+<h1>Hello world</h1>
 
 </slot>
 </article>
@@ -431,7 +323,7 @@ It can span multiple lines.</p>
     <div class="gap-4 flex">
         <a
             href="https://github.com/Tnixc"
-            class="hover:underline underline-offset-4 decoration-2 flex"
+            class="hover:underline underline-offset-[6px] decoration-2 flex"
             target="_blank"
             >[github]<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
     <path
@@ -442,7 +334,7 @@ It can span multiple lines.</p>
 </a>
         <a
             href="https://x.com/_Tnixc"
-            class="hover:underline underline-offset-4 decoration-2 flex"
+            class="hover:underline underline-offset-[6px] decoration-2 flex"
             target="_blank"
             >[twitter]<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
     <path
@@ -455,7 +347,7 @@ It can span multiple lines.</p>
     <div class="gap-4 flex">
         <a
             href="https://cloud.umami.is/share/o4Mje48LZ8anrxZi/tnixc.space"
-            class="hover:underline underline-offset-4 decoration-2 flex"
+            class="hover:underline underline-offset-[6px] decoration-2 flex"
             target="_blank"
             >[analytics]<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
     <path
@@ -466,7 +358,7 @@ It can span multiple lines.</p>
 </a>
         <a
             href="https://github.com/Tnixc/website-v6"
-            class="hover:underline underline-offset-4 decoration-2 flex"
+            class="hover:underline underline-offset-[6px] decoration-2 flex"
             target="_blank"
             >[source code]<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
     <path
