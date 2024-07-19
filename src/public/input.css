@@ -117,7 +117,7 @@
         @apply p-2 overflow-scroll rounded-md;
     }
     img {
-        @apply mx-auto py-4;
+        @apply mx-auto shadow-inner my-5 bg-neutral-400/50;
     }
     input[type="checkbox"] {
         @apply accent-black;
