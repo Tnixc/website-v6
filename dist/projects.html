@@ -1,6 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+<script>
+/*
+ Live.js - One script closer to Designing in the Browser
+ Written for Handcraft.com by Martin Kool (@mrtnkl).
+
+ Version 4.
+ Recent change: Made stylesheet and mimetype checks case insensitive.
+
+ http://livejs.com
+ http://livejs.com/license (MIT)
+ @livejs
+
+ Include live.js#css to monitor css changes only.
+ Include live.js#js to monitor js changes only.
+ Include live.js#html to monitor html changes only.
+ Mix and match to monitor a preferred combination such as live.js#html,css
+
+ By default, just include live.js to monitor all css, js and html changes.
+
+ Live.js can also be loaded as a bookmarklet. It is best to only use it for CSS then,
+ as a page reload due to a change in html or css would not re-include the bookmarklet.
+ To monitor CSS and be notified that it has loaded, include it as: live.js#css,notify
+*/
+(function () {
+
+ var headers = { "Etag": 1, "Last-Modified": 1, "Content-Length": 1, "Content-Type": 1 },
+     resources = {},
+     pendingRequests = {},
+     currentLinkElements = {},
+     oldLinkElements = {},
+     interval = 100,
+     loaded = false,
+     active = { "html": 1, "css": 1, "js": 1 };
+
+ var Live = {
+
+   // performs a cycle per interval
+   heartbeat: function () {
+     if (document.body) {
+       // make sure all resources are loaded on first activation
+       if (!loaded) Live.loadresources();
+       Live.checkForChanges();
+     }
+     setTimeout(Live.heartbeat, interval);
+   },
+
+   // loads all local css and js resources upon first activation
+   loadresources: function () {
+
+     // helper method to assert if a given url is local
+     function isLocal(url) {
+       var loc = document.location,
+           reg = new RegExp("^\\.|^\/(?!\/)|^[\\w]((?!://).)*$|" + loc.protocol + "//" + loc.host);
+       return url.match(reg);
+     }
+
+     // gather all resources
+     var scripts = document.getElementsByTagName("script"),
+         links = document.getElementsByTagName("link"),
+         uris = [];
+
+     // track local js urls
+     for (var i = 0; i < scripts.length; i++) {
+       var script = scripts[i], src = script.getAttribute("src");
+       if (src && isLocal(src))
+         uris.push(src);
+       if (src && src.match(/\blive.js#/)) {
+         for (var type in active)
+           active[type] = src.match("[#,|]" + type) != null
+         if (src.match("notify"))
+           alert("Live.js is loaded.");
+       }
+     }
+     if (!active.js) uris = [];
+     if (active.html) uris.push(document.location.href);
+
+     // track local css urls
+     for (var i = 0; i < links.length && active.css; i++) {
+       var link = links[i], rel = link.getAttribute("rel"), href = link.getAttribute("href", 2);
+       if (href && rel && rel.match(new RegExp("stylesheet", "i")) && isLocal(href)) {
+         uris.push(href);
+         currentLinkElements[href] = link;
+       }
+     }
+
+     // initialize the resources info
+     for (var i = 0; i < uris.length; i++) {
+       var url = uris[i];
+       Live.getHead(url, function (url, info) {
+         resources[url] = info;
+       });
+     }
+
+     // add rule for morphing between old and new css files
+     var head = document.getElementsByTagName("head")[0],
+         style = document.createElement("style"),
+         rule = "transition: all .3s ease-out;"
+     css = [".livejs-loading * { ", rule, " -webkit-", rule, "-moz-", rule, "-o-", rule, "}"].join('');
+     style.setAttribute("type", "text/css");
+     head.appendChild(style);
+     style.styleSheet ? style.styleSheet.cssText = css : style.appendChild(document.createTextNode(css));
+
+     // yep
+     loaded = true;
+   },
+
+   // check all tracking resources for changes
+   checkForChanges: function () {
+     for (var url in resources) {
+       if (pendingRequests[url])
+         continue;
+
+       Live.getHead(url, function (url, newInfo) {
+         var oldInfo = resources[url],
+             hasChanged = false;
+         resources[url] = newInfo;
+         for (var header in oldInfo) {
+           // do verification based on the header type
+           var oldValue = oldInfo[header],
+               newValue = newInfo[header],
+               contentType = newInfo["Content-Type"];
+           switch (header.toLowerCase()) {
+             case "etag":
+               if (!newValue) break;
+               // fall through to default
+             default:
+               hasChanged = oldValue != newValue;
+               break;
+           }
+           // if changed, act
+           if (hasChanged) {
+             Live.refreshResource(url, contentType);
+             break;
+           }
+         }
+       });
+     }
+   },
+
+   // act upon a changed url of certain content type
+   refreshResource: function (url, type) {
+     switch (type.toLowerCase()) {
+       // css files can be reloaded dynamically by replacing the link element
+       case "text/css":
+         var link = currentLinkElements[url],
+             html = document.body.parentNode,
+             head = link.parentNode,
+             next = link.nextSibling,
+             newLink = document.createElement("link");
+
+         html.className = html.className.replace(/\s*livejs\-loading/gi, '') + ' livejs-loading';
+         newLink.setAttribute("type", "text/css");
+         newLink.setAttribute("rel", "stylesheet");
+         newLink.setAttribute("href", url + "?now=" + new Date() * 1);
+         next ? head.insertBefore(newLink, next) : head.appendChild(newLink);
+         currentLinkElements[url] = newLink;
+         oldLinkElements[url] = link;
+
+         // schedule removal of the old link
+         Live.removeoldLinkElements();
+         break;
+
+       // check if an html resource is our current url, then reload
+       case "text/html":
+         if (url != document.location.href)
+           return;
+
+         // local javascript changes cause a reload as well
+       case "text/javascript":
+       case "application/javascript":
+       case "application/x-javascript":
+         document.location.reload();
+     }
+   },
+
+   // removes the old stylesheet rules only once the new one has finished loading
+   removeoldLinkElements: function () {
+     var pending = 0;
+     for (var url in oldLinkElements) {
+       // if this sheet has any cssRules, delete the old link
+       try {
+         var link = currentLinkElements[url],
+             oldLink = oldLinkElements[url],
+             html = document.body.parentNode,
+             sheet = link.sheet || link.styleSheet,
+             rules = sheet.rules || sheet.cssRules;
+         if (rules.length >= 0) {
+           oldLink.parentNode.removeChild(oldLink);
+           delete oldLinkElements[url];
+           setTimeout(function () {
+             html.className = html.className.replace(/\s*livejs\-loading/gi, '');
+           }, 100);
+         }
+       } catch (e) {
+         pending++;
+       }
+       if (pending) setTimeout(Live.removeoldLinkElements, 50);
+     }
+   },
+
+   // performs a HEAD request and passes the header info to the given callback
+   getHead: function (url, callback) {
+     pendingRequests[url] = true;
+     var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XmlHttp");
+     xhr.open("HEAD", url, true);
+     xhr.onreadystatechange = function () {
+       delete pendingRequests[url];
+       if (xhr.readyState == 4 && xhr.status != 304) {
+         xhr.getAllResponseHeaders();
+         var info = {};
+         for (var h in headers) {
+           var value = xhr.getResponseHeader(h);
+           // adjust the simple Etag variant to match on its significant part
+           if (h.toLowerCase() == "etag" && value) value = value.replace(/^W\//, '');
+           if (h.toLowerCase() == "content-type" && value) value = value.replace(/^(.*?);.*?$/i, "$1");
+           info[h] = value;
+         }
+         callback(url, info);
+       }
+     }
+     xhr.send();
+   }
+ };
+
+ // start listening
+ if (document.location.protocol != "file:") {
+   if (!window.liveJsLoaded)
+     Live.heartbeat();
+
+   window.liveJsLoaded = true;
+ }
+ else if (window.console)
+   console.log("Live.js doesn't support the file protocol. It needs http.");
+})();
+</script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/output.css" />
@@ -232,13 +468,14 @@
 </div>
 </div>
 </slot>
-            <div class="sm:py-20 py-6 font-mono flex justify-between flex-col gap-4">
+            <div class="sm:my-20 my-6 font-mono flex justify-between flex-col gap-4 bg-neutral-400/10 p-4">
+    <hr class="border-[1.5px] border-neutral-400/30" />
   <div class="justify-between flex md:flex-row flex-col gap-3">
     <a
       href="https://github.com/Tnixc"
-      class="hover:underline underline-offset-[6px] decoration-2 flex w-fit whitespace-nowrap"
+      class="hover:underline underline-offset-[6px] decoration-2 flex w-fit whitespace-nowrap bg-neutral-400/20"
       target="_blank"
-    >[github]<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+      >[github]<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
     <path
         fill="currentColor"
         d="M6 7c0 .55.45 1 1 1h7.59l-8.88 8.88a.996.996 0 1 0 1.41 1.41L16 9.41V17c0 .55.45 1 1 1s1-.45 1-1V7c0-.55-.45-1-1-1H7c-.55 0-1 .45-1 1"
@@ -247,29 +484,31 @@
 </a>
     <a
       href="https://x.com/_Tnixc"
-      class="hover:underline underline-offset-[6px] decoration-2 flex w-fit whitespace-nowrap"
+      class="hover:underline underline-offset-[6px] decoration-2 flex w-fit whitespace-nowrap bg-neutral-400/20"
       target="_blank"
-    >[twitter]<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+      >[twitter]<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
     <path
         fill="currentColor"
         d="M6 7c0 .55.45 1 1 1h7.59l-8.88 8.88a.996.996 0 1 0 1.41 1.41L16 9.41V17c0 .55.45 1 1 1s1-.45 1-1V7c0-.55-.45-1-1-1H7c-.55 0-1 .45-1 1"
     />
 </svg>
 </a>
-    <span class="whitespace-nowrap">&#64;Tnixc on discord</span>
-    <span class="whitespace-nowrap">tnixxc&#64;gmail.com</span>
+    <span class="whitespace-nowrap bg-neutral-400/20 w-fit">discord: &#64;Tnixc</span>
+    <span class="whitespace-nowrap bg-neutral-400/20 w-fit">tnixxc&#64;gmail.com</span>
   </div>
+    <hr class="border-[1.5px] border-neutral-400/30" />
   <div class="gap-4 flex text-neutral-700 justify-end w-fit flex-col">
     <a
       href="/content/about.html"
       class="hover:underline underline-offset-[6px] decoration-2 flex whitespace-nowrap w-fit"
       target="_blank"
-    >[about this site]</a>
+      >[about this site]</a
+    >
     <a
       href="https://github.com/Tnixc/website-v6"
       class="hover:underline underline-offset-[6px] decoration-2 flex whitespace-nowrap w-fit"
       target="_blank"
-    >[source code]<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+      >[source code]<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
     <path
         fill="currentColor"
         d="M6 7c0 .55.45 1 1 1h7.59l-8.88 8.88a.996.996 0 1 0 1.41 1.41L16 9.41V17c0 .55.45 1 1 1s1-.45 1-1V7c0-.55-.45-1-1-1H7c-.55 0-1 .45-1 1"
@@ -281,15 +520,18 @@
     <a
       class="hover:underline grid place-items-center font-sans underline-offset-[6px] decoration-2 whitespace-nowrap aspect-square"
       href="https://ctp-webr.ing/tnixc/previous"
-    >&lt;-</a>
+      >&lt;-</a
+    >
     <a
       class="hover:underline grid place-items-center content-center underline-offset-[6px] decoration-2 text-center"
       href="https://ctp-webr.ing/"
-    >catppuccin webring</a>
+      >catppuccin webring</a
+    >
     <a
       class="hover:underline grid place-items-center font-sans underline-offset-[6px] decoration-2 whitespace-nowrap aspect-square"
       href="https://ctp-webr.ing/tnixc/next"
-    >-&gt;</a>
+      >-&gt;</a
+    >
   </div>
 </div>
 
