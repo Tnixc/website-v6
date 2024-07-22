@@ -40,6 +40,45 @@
     <body
         class="bg-neutral-300 flex sm:flex-row flex-col sm:pt-56 sm:p-10 p-2 justify-center selection:bg-stone-400/60"
     >
+      <div class="fixed -z-20 not-sr-only" aria-hidden="true">
+        <div class="fixed inset-0 -right-[20vw] md:block hidden" id="overlay_1">
+            <div class="flex flex-col gap-3 items-end blur-[0.8vh] justify-between h-full">
+                <div class="w-1/2 h-[8%] bg-stone-400/40 -rotate-12 saturate-200"></div>
+                <div class="w-1/2 h-[8%] bg-stone-400/40 -rotate-12 saturate-200"></div>
+                <div class="w-1/2 h-[8%] bg-stone-400/40 -rotate-12 saturate-200"></div>
+                <div class="w-1/2 h-[8%] bg-stone-400/40 -rotate-12 saturate-200"></div>
+                <div class="w-1/2 h-[8%] bg-stone-400/40 -rotate-12 saturate-200"></div>
+                <div class="w-1/2 h-[8%] bg-stone-400/40 -rotate-12 saturate-200"></div>
+                <div class="w-1/2 h-[8%] bg-stone-400/40 -rotate-12 saturate-200"></div>
+                <div class="w-1/2 h-[8%] bg-stone-400/40 -rotate-12 saturate-200"></div>
+                <div class="w-1/2 h-[8%] bg-stone-400/40 -rotate-12 saturate-200"></div>
+                <div class="w-1/2 h-[8%] bg-stone-400/40 -rotate-12 saturate-200"></div>
+                <div class="w-1/2 h-[8%] bg-stone-400/40 -rotate-12 saturate-200"></div>
+                <div class="w-1/2 h-[8%] bg-stone-400/40 -rotate-12 saturate-200"></div>
+            </div>
+        </div>
+        <div class="fixed inset-0 md:block hidden" id="overlay_2">
+            <div
+                class="absolute h-full right-[12vw] w-[1.5%] bg-stone-400/20 saturate-200 blur-[0.2vw]"
+            ></div>
+            <div
+                class="absolute h-full right-[6vw] w-[2%] bg-stone-400/30 saturate-200 blur-[0.2vw]"
+            ></div>
+        </div>
+        <div class="fixed inset-0" id="overlay_3"></div>
+        <svg class="noise-overlay fixed inset-0 w-full h-full mix-blend-overlay grayscale opacity-30">
+            <filter id="noiseFilter">
+                <feTurbulence
+                    type="fractalNoise"
+                    baseFrequency="0.65"
+                    numOctaves="3"
+                    stitchTiles="stitch"
+                />
+            </filter>
+            <rect width="100%" height="100%" filter="url(#noiseFilter)" />
+        </svg>
+
+      </div>
         <div class="font-mono flex flex-col gap-8 p-6 h-fit">
     <svg class="w-36 h-auto" width="89" height="35" viewBox="0 0 89 35" fill="none" xmlns="http://www.w3.org/2000/svg">
 <mask id="mask0_11_75" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="89" height="35">
@@ -104,7 +143,7 @@
     </div>
 </div>
 
-        <main class="md:max-w-screen-md w-full p-6 inv">
+        <main class="md:max-w-screen-md w-full p-6 inv backdrop-blur-lg">
             <slot>
     <svg class="h-12 w-auto" width="73" height="28" viewBox="0 0 73 28" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M1.34 27C1.004 27 0.835999 26.88 0.835999 26.64C0.835999 26.4 1.028 26.244 1.412 26.172L2.924 25.92C3.404 25.848 3.764 25.728 4.004 25.56C4.244 25.368 4.412 25.02 4.508 24.516L9.512 2.91599C9.584 2.57999 9.548 2.33999 9.404 2.19599C9.284 2.05199 8.996 1.97999 8.54 1.97999C7.724 1.97999 6.824 2.31599 5.84 2.98799C4.88 3.63599 4.016 4.85999 3.248 6.65999L2.672 8.02799C2.552 8.33999 2.348 8.49599 2.06 8.49599C1.724 8.49599 1.616 8.29199 1.736 7.88399L3.536 1.36799C3.68 0.815993 3.944 0.539993 4.328 0.539993C4.544 0.539993 4.712 0.587993 4.832 0.683994C4.976 0.755993 5.204 0.839992 5.516 0.935992C5.828 1.03199 6.368 1.07999 7.136 1.07999H15.164C15.932 1.07999 16.496 1.03199 16.856 0.935992C17.24 0.839992 17.516 0.755993 17.684 0.683994C17.876 0.587993 18.044 0.539993 18.188 0.539993C18.596 0.539993 18.74 0.815993 18.62 1.36799L17.468 7.88399C17.396 8.29199 17.192 8.49599 16.856 8.49599C16.544 8.49599 16.412 8.33999 16.46 8.02799L16.532 7.12799C16.676 5.35199 16.448 4.05599 15.848 3.23999C15.248 2.39999 14.408 1.97999 13.328 1.97999C12.872 1.97999 12.548 2.05199 12.356 2.19599C12.188 2.33999 12.068 2.57999 11.996 2.91599L6.992 24.516C6.872 25.02 6.884 25.368 7.028 25.56C7.196 25.728 7.508 25.848 7.964 25.92L9.656 26.172C9.92 26.196 10.052 26.328 10.052 26.568C10.052 26.856 9.86 27 9.476 27H1.34Z" fill="black" style="fill:black;fill-opacity:1;"/>

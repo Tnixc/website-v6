@@ -40,6 +40,45 @@
     <body
         class="bg-neutral-300 flex sm:flex-row flex-col sm:pt-56 sm:p-10 p-2 justify-center selection:bg-stone-400/60"
     >
+      <div class="fixed -z-20 not-sr-only" aria-hidden="true">
+        <div class="fixed inset-0 -right-[20vw] md:block hidden" id="overlay_1">
+            <div class="flex flex-col gap-3 items-end blur-[0.8vh] justify-between h-full">
+                <div class="w-1/2 h-[8%] bg-stone-400/40 -rotate-12 saturate-200"></div>
+                <div class="w-1/2 h-[8%] bg-stone-400/40 -rotate-12 saturate-200"></div>
+                <div class="w-1/2 h-[8%] bg-stone-400/40 -rotate-12 saturate-200"></div>
+                <div class="w-1/2 h-[8%] bg-stone-400/40 -rotate-12 saturate-200"></div>
+                <div class="w-1/2 h-[8%] bg-stone-400/40 -rotate-12 saturate-200"></div>
+                <div class="w-1/2 h-[8%] bg-stone-400/40 -rotate-12 saturate-200"></div>
+                <div class="w-1/2 h-[8%] bg-stone-400/40 -rotate-12 saturate-200"></div>
+                <div class="w-1/2 h-[8%] bg-stone-400/40 -rotate-12 saturate-200"></div>
+                <div class="w-1/2 h-[8%] bg-stone-400/40 -rotate-12 saturate-200"></div>
+                <div class="w-1/2 h-[8%] bg-stone-400/40 -rotate-12 saturate-200"></div>
+                <div class="w-1/2 h-[8%] bg-stone-400/40 -rotate-12 saturate-200"></div>
+                <div class="w-1/2 h-[8%] bg-stone-400/40 -rotate-12 saturate-200"></div>
+            </div>
+        </div>
+        <div class="fixed inset-0 md:block hidden" id="overlay_2">
+            <div
+                class="absolute h-full right-[12vw] w-[1.5%] bg-stone-400/20 saturate-200 blur-[0.2vw]"
+            ></div>
+            <div
+                class="absolute h-full right-[6vw] w-[2%] bg-stone-400/30 saturate-200 blur-[0.2vw]"
+            ></div>
+        </div>
+        <div class="fixed inset-0" id="overlay_3"></div>
+        <svg class="noise-overlay fixed inset-0 w-full h-full mix-blend-overlay grayscale opacity-30">
+            <filter id="noiseFilter">
+                <feTurbulence
+                    type="fractalNoise"
+                    baseFrequency="0.65"
+                    numOctaves="3"
+                    stitchTiles="stitch"
+                />
+            </filter>
+            <rect width="100%" height="100%" filter="url(#noiseFilter)" />
+        </svg>
+
+      </div>
         <div class="font-mono flex flex-col gap-8 p-6 h-fit">
     <svg class="w-36 h-auto" width="89" height="35" viewBox="0 0 89 35" fill="none" xmlns="http://www.w3.org/2000/svg">
 <mask id="mask0_11_75" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="89" height="35">
@@ -104,7 +143,7 @@
     </div>
 </div>
 
-        <main class="md:max-w-screen-md w-full p-6 inv">
+        <main class="md:max-w-screen-md w-full p-6 inv backdrop-blur-lg">
             <slot>
     <h1 class="text-3xl font-mono">[projects]</h1>
     <p class="pt-3 text-neutral-700">
