@@ -38,7 +38,7 @@
 </head>
 
     <body
-        class="bg-neutral-300 flex sm:flex-row flex-col sm:pt-56 sm:p-10 p-2 justify-center selection:bg-stone-400/60"
+        class="bg-neutral-200 flex sm:flex-row flex-col sm:pt-56 sm:p-10 p-2 justify-center selection:bg-stone-400/60"
     >
         <div class="font-mono flex flex-col gap-8 p-6 h-fit">
     <svg class="w-36 h-auto" width="89" height="35" viewBox="0 0 89 35" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -107,7 +107,7 @@
         <main class="md:max-w-screen-md w-full p-6 inv">
             <slot>
 <a href="/writing.html" class="font-mono py-4 block w-fit underline-offset-[6px] decoration-2 hover:underline">[&lt;back]</a>
-<h1 class="text-2xl font-semibold">Simple - Building a component-based static site assembler</h1>
+<h1 class="font-grotesk text-3xl">Simple - Building a component-based static site assembler</h1>
 <p class="text-neutral-500 pt-1">Published 18/07/2024</p>
 <p class="pt-3">
     I should have just used Astro. Also SPAs are faster.
@@ -136,7 +136,7 @@
 <li><input type="checkbox" disabled="" /> Keep some elements loaded to avoid reading from disk every time.</li>
 <li><input type="checkbox" disabled="" /> Switch to using a .config file</li>
 <li><input type="checkbox" disabled="" /> Proper escaping from <code>{}, &quot;&quot;</code>, etc.</li>
-<li><input type="checkbox" disabled="" /> Check for circular deps.</li>
+<li><input type="checkbox" checked="" disabled="" /> Check for circular deps.</li>
 <li><input type="checkbox" disabled="" /> Implement MD rendering (external lib) from .md files. Not needed tho maybe?</li>
 <li><input type="checkbox" disabled="" /> Look into testing (tons of edge cases)</li>
 <li><input type="checkbox" disabled="" /> OG Image and meta generation, especially for markdown posts</li>
@@ -221,7 +221,7 @@
 </slot>
 </article>
 </slot>
-            <div class="sm:my-20 my-6 font-mono flex justify-between flex-col gap-4 bg-neutral-400/10 p-4">
+            <div class="sm:my-20 my-6 font-mono flex justify-between flex-col gap-4 bg-neutral-400/10 p-2 text-sm">
     <hr class="border-[1.5px] border-neutral-400/30" />
   <div class="justify-between flex md:flex-row flex-col gap-3">
     <a

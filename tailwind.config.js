@@ -5,7 +5,8 @@ module.exports = {
     theme: {
         fontFamily: {
             mono: ["basier_square_monoregular", "ui-monospace", "monospace", "menlo"],
-            sans: ["InterVariable", "Inter", "system-ui", "ui-sans-serif"],
+            sans: ["PretendardVariable", "system-ui", "ui-sans-serif"],
+            grotesk: ["OverusedGrotesk", "system-ui"]
         },
         extend: {},
     },

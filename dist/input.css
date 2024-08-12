@@ -4,6 +4,14 @@
 
 @layer base {
   @font-face {
+      font-family: "PretendardVariable";
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src:
+        url("./fonts/PretendardVariable.woff2") format("woff2");
+  }
+  @font-face {
     font-family: "basier_square_monoregular";
     src: url("./fonts/basiersquaremono-regular-webfont.woff2") format("woff2");
     font-weight: normal;
@@ -11,20 +19,12 @@
     font-display: swap;
   }
   @font-face {
-    font-family: "InterVariable";
-    font-style: normal;
-    font-weight: 100 900;
-    font-display: swap;
-    src:
-      local("Inter"),
-      url("./fonts/InterVariable.woff2") format("woff2");
-  }
-  @font-face {
-    font-family: "InterVariable";
-    font-style: italic;
-    font-weight: 100 900;
-    font-display: swap;
-    src: url("./fonts/InterVariable-Italic.woff2") format("woff2");
+      font-family: "OverusedGrotesk";
+      font-style: normal;
+      font-weight: 300 900;
+      font-display: swap;
+      src:
+        url("./fonts/OverusedGrotesk.woff2") format("woff2");
   }
 }
 * {
@@ -39,18 +39,20 @@
 }
 .prose {
   h1 {
-    @apply text-2xl font-semibold pt-7;
+    @apply text-4xl font-grotesk pt-8 font-light;
   }
   h2 {
-    @apply text-xl font-semibold pt-6;
+    @apply text-3xl font-grotesk pt-7;
   }
   h3 {
-    @apply text-lg font-semibold pt-5;
+    @apply text-2xl font-grotesk pt-6;
   }
-  h4,
+  h4 {
+      @apply text-xl font-semibold pt-5;
+  }
   h5,
   h6 {
-    @apply text-base font-semibold pt-4;
+    @apply text-lg font-semibold pt-4;
   }
   hr {
     @apply border-neutral-400/50 mt-7 border-[1.5px];
@@ -123,7 +125,7 @@
   }
   pre {
     background-color: #3e3e5e !important;
-    @apply p-2 overflow-scroll rounded-md;
+    @apply mt-4 p-2 overflow-scroll rounded-md;
   }
   img {
     @apply mx-auto shadow-inner my-5 bg-neutral-400/50;
