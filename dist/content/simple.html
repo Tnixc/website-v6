@@ -105,7 +105,7 @@
 </div>
 
         <main class="md:max-w-screen-md w-full p-6 inv">
-            <slot>
+            
 <a href="/writing.html" class="font-mono py-4 block w-fit underline-offset-[6px] decoration-2 hover:underline">[&lt;back]</a>
 <h1 class="font-grotesk text-3xl">Simple - Building a component-based static site assembler</h1>
 <p class="text-neutral-500 pt-1">Published 18/07/2024</p>
@@ -116,7 +116,7 @@
     <hr class="border-[1.5px] border-neutral-400/50" />
 </div>
 <article class="prose">
-<slot>
+
     <!-- prettier-ignore -->
 <p>I have an unhealthy addiction to redoing my personal website every few months (I have an article the history of this site <a href="https://tnixc.space/content/site_history.html">here</a>). As of v6, I've already tried Vue(and Nuxt), Svelte(kit), as well as Astro, and I was getting pretty tired of those.</p>
 <p>So obviously, I decided to write my own component-based html assembler in rust, and I'm calling it <strong>simple</strong> because it is. It was quite daunting at first, but now that it's somewhat functional it seemed pretty easy, although some compromises were made. It's pretty damn slow right now, hopefully I can fix that.</p>
@@ -195,7 +195,7 @@
 <pre style="background-color:#3b3228;"><code class="language-html"><span style="color:#d0c8c6;">&lt;-{Template} /&gt;
 </span></code></pre>
 <p>And in templates/Template.html and data/Template.json,</p>
-<pre style="background-color:#3b3228;"><code class="language-html"><span style="color:#d0c8c6;">&lt;</span><span style="color:#cb6077;">p</span><span style="color:#d0c8c6;">&gt;${something}&lt;/</span><span style="color:#cb6077;">p</span><span style="color:#d0c8c6;">&gt;
+<pre style="background-color:#3b3228;"><code class="language-html"><span style="color:#d0c8c6;">&lt;</span><span style="color:#cb6077;">p</span><span style="color:#d0c8c6;">&gt;&lt;/</span><span style="color:#cb6077;">p</span><span style="color:#d0c8c6;">&gt;
 </span></code></pre>
 <p>Will match</p>
 <pre style="background-color:#3b3228;"><code class="language-json"><span style="color:#d0c8c6;">[{ &quot;</span><span style="color:#beb55b;">something</span><span style="color:#d0c8c6;">&quot;: &quot;</span><span style="color:#beb55b;">a</span><span style="color:#d0c8c6;">&quot; }, { &quot;</span><span style="color:#beb55b;">something</span><span style="color:#d0c8c6;">&quot;: &quot;</span><span style="color:#beb55b;">b</span><span style="color:#d0c8c6;">&quot; }]
@@ -218,9 +218,9 @@
 <p>Of course there's no reactivity, though I would like to build my own framework with reactivity someday. That's why I called this an &quot;assembler&quot; and not a &quot;framework&quot;. Not much logic here. It also feels surprisingly fast in dev when I save and see the changes, but I haven't tested it with a lot of components yet. And actually, SPAs feel faster than sites like these, and if you want something actually good for templating, you should use tera and extend it.</p>
 <p>You can view the source code <a href="https://github.com/Tnixc/simple">here</a>(it's really bad).</p>
 
-</slot>
+
 </article>
-</slot>
+
             <div class="sm:my-20 my-6 font-mono flex justify-between flex-col gap-4 bg-neutral-400/10 p-2 text-sm">
     <hr class="border-[1.5px] border-neutral-400/30" />
   <div class="justify-between flex md:flex-row flex-col gap-3">
