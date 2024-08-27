@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/output.css" />
+    <link rel="stylesheet" href="/syntax.css" rel="preload" />
     <link rel="icon" href="/favicon.png" type="image/png" />
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -160,49 +161,49 @@
 <hr />
 <h1>Syntax</h1>
 <p>The file tree should look something like this:</p>
-<pre style="background-color:#3b3228;"><code class="language-rust"><span style="color:#d0c8c6;">example
-</span><span style="color:#d0c8c6;">└── src
-</span><span style="color:#d0c8c6;">    ├── components
-</span><span style="color:#d0c8c6;">    │  ├── Component.html
-</span><span style="color:#d0c8c6;">    │  └── Folder
-</span><span style="color:#d0c8c6;">    │     └── Component.html
-</span><span style="color:#d0c8c6;">    ├── data
-</span><span style="color:#d0c8c6;">    │  └── Something.json
-</span><span style="color:#d0c8c6;">    ├── pages
-</span><span style="color:#d0c8c6;">    │  ├── folder
-</span><span style="color:#d0c8c6;">    │  │  └── page.html
-</span><span style="color:#d0c8c6;">    │  └── index.html
-</span><span style="color:#d0c8c6;">    ├── public
-</span><span style="color:#d0c8c6;">    │  ├── image.png
-</span><span style="color:#d0c8c6;">    │  ├── folder
-</span><span style="color:#d0c8c6;">    │  │  └── image2.png
-</span><span style="color:#d0c8c6;">    └── templates
-</span><span style="color:#d0c8c6;">        └── Something.html
+<pre class="syntax-highlighting"><code class="language-rust"><span class="source rust">example
+└── src
+    ├── components
+    │  ├── Component.html
+    │  └── Folder
+    │     └── Component.html
+    ├── data
+    │  └── Something.json
+    ├── pages
+    │  ├── folder
+    │  │  └── page.html
+    │  └── index.html
+    ├── public
+    │  ├── image.png
+    │  ├── folder
+    │  │  └── image2.png
+    └── templates
+        └── Something.html
 </span></code></pre>
 <h3>Components</h3>
 <p>Components, and folders in /components must be in <code>PascalCase</code>. The first letter must be capitalized.</p>
 <p>To use a component:</p>
-<pre style="background-color:#3b3228;"><code class="language-html"><span style="color:#d0c8c6;">&lt;</span><span style="color:#cb6077;">Component</span><span style="color:#d0c8c6;"> /&gt;
+<pre class="syntax-highlighting"><code class="language-html"><span class="text html basic"><span class="meta tag other html"><span class="punctuation definition tag begin html">&lt;</span><span class="entity name tag other html">Component</span><span class="punctuation definition tag end html"> /&gt;</span></span>
 </span></code></pre>
 <p>It searches from /components, so if a component is in a subfolder do this:</p>
-<pre style="background-color:#3b3228;"><code class="language-html"><span style="color:#d0c8c6;">&lt;</span><span style="color:#cb6077;">Folder:Component</span><span style="color:#d0c8c6;"> /&gt;
+<pre class="syntax-highlighting"><code class="language-html"><span class="text html basic"><span class="meta tag other html"><span class="punctuation definition tag begin html">&lt;</span><span class="entity name tag other html">Folder:Component</span><span class="punctuation definition tag end html"> /&gt;</span></span>
 </span></code></pre>
 <p>so don't use <code>:</code> in your component or folder names.</p>
 <h3>Templates</h3>
 <p>The templates are stored in /templates, and the data for the corresponding template is in /data.</p>
 <p>A data file should have the same name as the template file. Keep in mind the template file is the one that's being repeated.</p>
 <p>To use:</p>
-<pre style="background-color:#3b3228;"><code class="language-html"><span style="color:#d0c8c6;">&lt;-{Template} /&gt;
+<pre class="syntax-highlighting"><code class="language-html"><span class="text html basic">&lt;-{Template} /&gt;
 </span></code></pre>
 <p>And in templates/Template.html and data/Template.json,</p>
-<pre style="background-color:#3b3228;"><code class="language-html"><span style="color:#d0c8c6;">&lt;</span><span style="color:#cb6077;">p</span><span style="color:#d0c8c6;">&gt;&lt;/</span><span style="color:#cb6077;">p</span><span style="color:#d0c8c6;">&gt;
+<pre class="syntax-highlighting"><code class="language-html"><span class="text html basic"><span class="meta tag block any html"><span class="punctuation definition tag begin html">&lt;</span><span class="entity name tag block any html">p</span><span class="punctuation definition tag end html">&gt;</span></span><span class="meta tag block any html"><span class="punctuation definition tag begin html">&lt;/</span><span class="entity name tag block any html">p</span><span class="punctuation definition tag end html">&gt;</span></span>
 </span></code></pre>
 <p>Will match</p>
-<pre style="background-color:#3b3228;"><code class="language-json"><span style="color:#d0c8c6;">[{ &quot;</span><span style="color:#beb55b;">something</span><span style="color:#d0c8c6;">&quot;: &quot;</span><span style="color:#beb55b;">a</span><span style="color:#d0c8c6;">&quot; }, { &quot;</span><span style="color:#beb55b;">something</span><span style="color:#d0c8c6;">&quot;: &quot;</span><span style="color:#beb55b;">b</span><span style="color:#d0c8c6;">&quot; }]
+<pre class="syntax-highlighting"><code class="language-json"><span class="source json"><span class="meta structure array json"><span class="punctuation section array begin json">[</span><span class="meta structure dictionary json"><span class="punctuation section dictionary begin json">{</span> <span class="meta structure dictionary key json"><span class="string quoted double json"><span class="punctuation definition string begin json">&quot;</span>something<span class="punctuation definition string end json">&quot;</span></span></span><span class="meta structure dictionary value json"><span class="punctuation separator dictionary key-value json">:</span> <span class="string quoted double json"><span class="punctuation definition string begin json">&quot;</span>a<span class="punctuation definition string end json">&quot;</span></span> </span><span class="punctuation section dictionary end json">}</span></span><span class="punctuation separator array json">,</span> <span class="meta structure dictionary json"><span class="punctuation section dictionary begin json">{</span> <span class="meta structure dictionary key json"><span class="string quoted double json"><span class="punctuation definition string begin json">&quot;</span>something<span class="punctuation definition string end json">&quot;</span></span></span><span class="meta structure dictionary value json"><span class="punctuation separator dictionary key-value json">:</span> <span class="string quoted double json"><span class="punctuation definition string begin json">&quot;</span>b<span class="punctuation definition string end json">&quot;</span></span> </span><span class="punctuation section dictionary end json">}</span></span><span class="punctuation section array end json">]</span></span>
 </span></code></pre>
 <p>You can use components in templates and vice versa. It recursively resolves each one so if a lot of places use a component it could become inefficient because it reads from disk every time. It also doesn't halt on circular dependencies (yet!).</p>
 <p>It also works with tailwind:</p>
-<pre style="background-color:#3b3228;"><code class="language-sh"><span style="color:#8ab3b5;">bunx</span><span style="color:#d0c8c6;"> tailwindcss</span><span style="color:#cb6077;"> -i</span><span style="color:#d0c8c6;"> ./src/public/input.css</span><span style="color:#cb6077;"> -o</span><span style="color:#d0c8c6;"> ./src/public/output.css</span><span style="color:#cb6077;"> --watch
+<pre class="syntax-highlighting"><code class="language-sh"><span class="source shell bash"><span class="meta function-call shell"><span class="variable function shell">bunx</span></span><span class="meta function-call arguments shell"> tailwindcss<span class="variable parameter option shell"><span class="punctuation definition parameter shell"> -</span>i</span> ./src/public/input.css<span class="variable parameter option shell"><span class="punctuation definition parameter shell"> -</span>o</span> ./src/public/output.css<span class="variable parameter option shell"><span class="punctuation definition parameter shell"> --</span>watch</span></span>
 </span></code></pre>
 <hr />
 <p>I tried to build it with minimal dependencies.</p>
