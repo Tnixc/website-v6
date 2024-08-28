@@ -18,9 +18,9 @@
     "tags": "rust/cli"
   },
   {
-    "title": "tokyo",
+    "title": "edo",
     "description": "A color theme based off of the foreground colors of tokyo-night and the background color of catppuccin macchiato. I made it because I found catppuccin macchiato too desaturated. It mainly consists of catppuccin themes that I used replacer on to replace the hex codes.",
-    "link": "Tnixc/tokyo",
+    "link": "Tnixc/edo",
     "tags": "theme"
   },
   {
