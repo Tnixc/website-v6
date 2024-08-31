@@ -132,6 +132,7 @@
   code::after,
   code::before {
     content: "`";
+    opacity: 0.5;
   }
 
   code,
@@ -149,7 +150,7 @@
   }
 
   pre {
-    @apply mt-4 p-4 overflow-scroll rounded-md saturate-100;
+    @apply mt-4 p-4 overflow-scroll rounded-sm;
   }
 
   img {
