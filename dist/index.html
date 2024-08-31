@@ -47,12 +47,12 @@
   clip-path: polygon(100% 0, 100% 100%, calc(0% + 12px) 100%, 0 calc(100% - 12px), 0 0);
 }
 #small-logo p {
-    background: linear-gradient(to left, #ef4444FF 20%, #ef4444A0 20%, #ef4444A0 40%, #ef444470 40%,#ef444470 60%, #ef444440 60%, #ef444440 60%,#ef444440 80%, #ef444410 80%);
+    background: linear-gradient(to left, #ef4444E0 20%, #ef4444A0 20%, #ef4444A0 40%, #ef444470 40%,#ef444470 60%, #ef444440 60%, #ef444440 60%,#ef444440 80%, #ef444410 80%);
     filter: saturate(0.6);
 }
 </style>
 <div
-  class="bg-amber-500 w-36 h-auto bg-yellow-600/50 h-12 w-40 flex items-center"
+  class="bg-amber-500 w-36 h-auto bg-yellow-600/50 h-12 w-40 flex items-center group"
   id="small-logo"
 >
   <div class="h-12 w-12  grid place-items-center">
@@ -61,7 +61,7 @@
   <div class="h-full w-[1px] bg-amber-900/40"></div>
   <div class="h-full w-[1px]"></div>
   <div class="h-full w-[1px] bg-amber-900/40"></div>
-  <p class="text-2xl px-2 text-amber-950/80 mx-2 shadow-[0_0_0_2px_#ef4444]">TNIXC</p>
+  <p class="text-2xl px-1 text-amber-950/80 mr-2 ml-auto shadow-[0_0_0_2px_#ef4444] select-none group-hover:animate-pulse">TNIXC</p>
 </div>
 
   <div class="flex flex-col gap-5 pl-2">
@@ -90,7 +90,8 @@
 
     <main class="md:max-w-screen-md w-full p-6 inv">
       
-  <div id="tnixc-wrapper" class="relative">
+  <div class="overflow-clip pb-5 pr-5">
+<div id="tnixc-wrapper" class="relative ">
 <div class="h-40 bg-teal-700/30 p-4 relative z-10" id="tnixc">
   <div class="absolute z-1 inset-0 grid place-items-center"><div class="absolute top-4 right-4 sm:opacity-100 opacity-20" id="barcode">
 <svg width="191" height="46" viewBox="0 0 191 46" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -318,9 +319,11 @@ div:hover>#barcode {
 </svg>
 
 </div>
-  <svg class="absolute -top-4 left-48 z-20 -rotate-12" width="27" height="101" viewBox="0 0 27 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- paperclip -->
+  <svg class="absolute -top-4 left-48 z-20 -rotate-12 sm:block hidden" width="27" height="101" viewBox="0 0 27 101" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M6 34V90C6 95.5228 10.4772 100 16 100V100C21.5228 100 26 95.5228 26 90V13.5C26 6.59644 20.4036 1 13.5 1V1C6.59644 1 1 6.59644 1 13.5V14" stroke="#333333" stroke-width="2"/>
   </svg>
+</div>
 </div>
 <style>
 #tnixc-wrapper::before,#tnixc-wrapper::after{
