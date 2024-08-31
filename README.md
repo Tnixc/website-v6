@@ -6,4 +6,5 @@ Edition 6 of https://tnixc.space
 
 Built with my very own static site assembler [simple](https://github.com/tnixc/simple).
 
-![image](https://github.com/user-attachments/assets/59ba0a2e-bc42-4a3b-af26-e94ea1841adf)
+![image](https://github.com/user-attachments/assets/c3e1189d-6910-4103-9b4f-522cb6aab54f)
+
