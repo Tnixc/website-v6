@@ -1,19 +1,10 @@
 <a class="bg-neutral-400/20 p-4 block post relative group" href="${link}">
-    <h1 class="font-grotesk text-2xl">${title}</h1>
-    <p class="text-neutral-700 pt-1">Published ${date}</p>
-    <p class="text-neutral-700 pt-3">${description}</p>
-    <div
-        class="absolute right-2 top-2 h-20 bg-neutral-200/60 backdrop-blur-md aspect-square grid place-items-center border-2 border-dashed border-neutral-400 transition-all [clip-path:inset(0_0_0_100%)] sm:group-hover:[clip-path:inset(0_0_0_0)] group-hover:[clip-path:inset(0_0_0_100%)]"
-    >
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512" class="opacity-50">
-            <path
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="48"
-                d="m268 112l144 144l-144 144m124-144H100"
-            />
-        </svg>
-    </div>
+  <h1 class="font-grotesk text-2xl">${title}</h1>
+  <p class="text-neutral-700 pt-1">Published ${date}</p>
+  <p class="text-neutral-700 pt-3">${description}</p>
+  <div
+    class="absolute right-2 top-2 p-2 bg-neutral-200/60 backdrop-blur-md grid place-items-center border-2 border-dashed border-neutral-400 transition-all [clip-path:inset(0_0_0_100%)] sm:group-hover:[clip-path:inset(0_0_0_0)] group-hover:[clip-path:inset(0_0_0_100%)]"
+  >
+    <p>view <span class="font-semibold">→</span></p>
+  </div>
 </a>

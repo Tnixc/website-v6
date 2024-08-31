@@ -3,162 +3,160 @@
 @tailwind utilities;
 
 @layer base {
-    @font-face {
-        font-family: "PretendardVariable";
-        font-style: normal;
-        font-weight: 100 900;
-        font-display: swap;
-        src:
-            url("./fonts/PretendardVariable.woff2") format("woff2");
-    }
+  @font-face {
+    font-family: "PretendardVariable";
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url("./fonts/PretendardVariable.woff2") format("woff2");
+  }
 
-    @font-face {
-        font-family: "basier_square_monoregular";
-        src: url("./fonts/basiersquaremono-regular-webfont.woff2") format("woff2");
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-    }
+  @font-face {
+    font-family: "basier_square_monoregular";
+    src: url("./fonts/basiersquaremono-regular-webfont.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
 
-    @font-face {
-        font-family: "OverusedGrotesk";
-        font-style: normal;
-        font-weight: 300 900;
-        font-display: swap;
-        src:
-            url("./fonts/OverusedGrotesk.woff2") format("woff2");
-    }
+  @font-face {
+    font-family: "OverusedGrotesk";
+    font-style: normal;
+    font-weight: 300 900;
+    font-display: swap;
+    src: url("./fonts/OverusedGrotesk.woff2") format("woff2");
+  }
 }
 
 * {
-    font-feature-settings:
-        "cv13" off,
-        "cv12" off,
-        "ss02" on,
-        "salt" on,
-        "ss01" on,
-        "ss03" on,
-        "ss04" on;
+  font-feature-settings:
+    "cv13" off,
+    "cv12" off,
+    "ss02" on,
+    "salt" on,
+    "ss01" on,
+    "ss03" on,
+    "ss04" on;
 }
 
 .prose {
-    h1 {
-        @apply text-4xl font-grotesk pt-8 font-light;
-    }
+  h1 {
+    @apply text-4xl font-grotesk pt-8 font-light;
+  }
 
-    h2 {
-        @apply text-3xl font-grotesk pt-7;
-    }
+  h2 {
+    @apply text-3xl font-grotesk pt-7;
+  }
 
-    h3 {
-        @apply text-2xl font-grotesk pt-6;
-    }
+  h3 {
+    @apply text-2xl font-grotesk pt-6;
+  }
 
-    h4 {
-        @apply text-xl font-semibold pt-5;
-    }
+  h4 {
+    @apply text-xl font-semibold pt-5;
+  }
 
-    h5,
-    h6 {
-        @apply text-lg font-semibold pt-4;
-    }
+  h5,
+  h6 {
+    @apply text-lg font-semibold pt-4;
+  }
 
-    hr {
-        @apply border-neutral-400/50 mt-7 border-[1.5px];
-    }
+  hr {
+    @apply border-neutral-400/50 mt-7 border-[1.5px];
+  }
 
-    p {
-        @apply text-neutral-700 pt-3 leading-relaxed;
-    }
+  p {
+    @apply text-neutral-700 pt-3 leading-relaxed;
+  }
 
-    strong {
-        @apply not-italic font-semibold bg-amber-300/60 text-black;
-    }
+  strong {
+    @apply not-italic font-semibold bg-amber-400/60 text-black;
+  }
 
-    em {
-        @apply not-italic underline underline-offset-[3px] decoration-2 text-black;
-    }
+  em {
+    @apply not-italic underline underline-offset-[3px] decoration-2 text-black;
+  }
 
-    a {
-        @apply hover:underline underline-offset-[6px] decoration-2 text-black font-semibold;
-    }
+  a {
+    @apply hover:underline underline-offset-[6px] decoration-2 text-black font-semibold;
+  }
 
-    a::before {
-        content: "[";
-        opacity: 0.5;
-    }
+  a::before {
+    content: "[";
+    opacity: 0.5;
+  }
 
-    a::after {
-        content: "]";
-        opacity: 0.5;
-    }
+  a::after {
+    content: "]";
+    opacity: 0.5;
+  }
 
-    blockquote {
-        @apply border-l-4 border-neutral-400 pl-4 italic text-neutral-600 pb-4;
-    }
+  blockquote {
+    @apply border-l-4 border-neutral-400 pl-4 italic text-neutral-600 pb-4;
+  }
 
-    ul {
-        @apply list-disc list-outside pt-3 pl-4;
-    }
+  ul {
+    @apply list-disc list-outside pt-3 pl-4;
+  }
 
-    ol {
-        @apply list-decimal list-outside pt-3 pl-4;
-    }
+  ol {
+    @apply list-decimal list-outside pt-3 pl-4;
+  }
 
-    li {
-        @apply pt-1 text-neutral-700;
-    }
+  li {
+    @apply pt-1 text-neutral-700;
+  }
 
-    li>ul,
-    li>ol {
-        @apply pl-4 pt-0;
-    }
+  li > ul,
+  li > ol {
+    @apply pl-4 pt-0;
+  }
 
-    table {
-        @apply w-full border-2 border-neutral-400/50 mt-6;
-    }
+  table {
+    @apply w-full border-2 border-neutral-400/50 mt-6;
+  }
 
-    th,
-    td {
-        @apply border border-neutral-400/50 px-4 py-2 text-left;
-    }
+  th,
+  td {
+    @apply border border-neutral-400/50 px-4 py-2 text-left;
+  }
 
-    th {
-        @apply bg-neutral-400/30 font-semibold;
-    }
+  th {
+    @apply bg-neutral-400/30 font-semibold;
+  }
 
-    code {
-        @apply text-black bg-neutral-400/50;
-    }
+  code {
+    @apply text-black bg-neutral-400/50;
+  }
 
-    code::after,
-    code::before {
-        content: "`";
-    }
+  code::after,
+  code::before {
+    content: "`";
+  }
 
-    code,
-    pre {
-        @apply text-sm;
-    }
+  code,
+  pre {
+    @apply text-sm;
+  }
 
-    pre code::after,
-    pre code::before {
-        content: "";
-    }
+  pre code::after,
+  pre code::before {
+    content: "";
+  }
 
-    pre::-webkit-scrollbar {
-        display: none;
-    }
+  pre::-webkit-scrollbar {
+    display: none;
+  }
 
-    pre {
-        @apply mt-4 p-4 overflow-scroll rounded-md saturate-100;
-    }
+  pre {
+    @apply mt-4 p-4 overflow-scroll rounded-md saturate-100;
+  }
 
-    img {
-        @apply mx-auto shadow-inner my-5 bg-neutral-400/50;
-    }
+  img {
+    @apply mx-auto shadow-inner my-5 bg-neutral-400/50;
+  }
 
-    input[type="checkbox"] {
-        @apply accent-black;
-    }
+  input[type="checkbox"] {
+    @apply accent-black;
+  }
 }
