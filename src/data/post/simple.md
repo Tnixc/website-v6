@@ -1,11 +1,3 @@
-<Writing:PostLayout
-    title="Simple - Building a component-based static site assembler"
-    date="18/07/2024"
-    description="I should have just used Astro. Also SPAs are faster."
->
-    <!-- prettier-ignore -->
-<markdown>
-
 I have an unhealthy addiction to redoing my personal website every few months (I have an article the history of this site [here](https://tnixc.space/content/site_history.html)). As of v6, I've already tried Vue(and Nuxt), Svelte(kit), as well as Astro, and I was getting pretty tired of those.
 
 So obviously, I decided to write my own component-based html assembler in rust, and I'm calling it **simple** because it is. It was quite daunting at first, but now that it's somewhat functional it seemed pretty easy, although some compromises were made. It's pretty damn slow right now, hopefully I can fix that.
@@ -145,5 +137,3 @@ Of course there's no reactivity, though I would like to build my own framework w
 
 > You can view the source code [here](https://github.com/Tnixc/simple)(it's really bad).
 > This article is super outdated now, check out the readme on the github for updates!
-</markdown>
-</Writing:PostLayout>

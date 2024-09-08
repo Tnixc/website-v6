@@ -1,10 +1,3 @@
-<Writing:PostLayout
-  title="The history of tnixc.space"
-  date="18/07/2024"
-  description="I'm not proud of what it was, but I'm proud of how far its come."
->
-  <!-- prettier-ignore -->
-  <markdown>
 I launched the first edition of tnixc.space just 10 months ago! Feels like a lifetime ago already. Each iteration of the site has reflected my growth and learning at the time.
 
 ## v1
@@ -40,7 +33,3 @@ Two months later, I began v5. This version featured a significant design change 
 ---
 
 Overall, I'm happy with how the recent editions have turned out. This isn't the end—there will definitely be more iterations in the future, and maybe this version will appear in a blog post in a few months.
-
-
-</markdown>
-</Writing:PostLayout>
