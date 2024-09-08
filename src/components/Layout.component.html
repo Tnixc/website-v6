@@ -2,13 +2,13 @@
 <html lang="en">
   <Layout:Head title="tnixc.space" />
   <body
-    class="bg-neutral-200 flex flex-col lg:flex-row p-2 justify-center selection:bg-stone-400/60 lg:pt-64"
+    class="flex flex-col justify-center p-2 lg:flex-row lg:pt-64 bg-neutral-200 selection:bg-stone-400/60"
   >
     <Layout:Nav />
-    <main class="md:max-w-screen-md w-full p-6 inv">
+    <main class="p-6 w-full md:max-w-screen-md inv">
       <slot></slot>
       <Layout:Footer />
     </main>
-    <div class="xl:max-w-44 w-full max-w-0 transition-all duration-500"></div>
+    <div class="w-full max-w-0 transition-all duration-500 xl:max-w-44"></div>
   </body>
 </html>
