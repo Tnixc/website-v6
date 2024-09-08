@@ -1,5 +1,13 @@
 [
   {
+    "title": "Techniques to get something done",
+    "description": "Very rarely do I do this, actually.",
+    "link": "./content/rules_stuff_done.html",
+    "date": "07/09/2024",
+    "--entry-path": "/post/rules_stuff_done.md",
+    "--result-path": "/content/rules_stuff_done.html"
+  },
+  {
     "title": "Simple - Building a component-based static site assembler",
     "description": "I should have just used Astro. Also SPAs are faster.",
     "link": "./content/simple.html",
