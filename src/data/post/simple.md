@@ -3,6 +3,7 @@ I have an unhealthy addiction to redoing my personal website every few months (I
 So obviously, I decided to write my own component-based html assembler in rust, and I'm calling it **simple** because it is. It was quite daunting at first, but now that it's somewhat functional it seemed pretty easy, although some compromises were made. It's pretty damn slow right now, hopefully I can fix that.
 
 # Features
+
 - Components, with props and slots.
 - Templating engine
 - `<markdown>` component for rendering markdown.
@@ -132,8 +133,6 @@ After all, it's too simple to warrant a large number of dependencies.
 ---
 
 Of course there's no reactivity, though I would like to build my own framework with reactivity someday. That's why I called this an "assembler" and not a "framework". Not much logic here. It also feels surprisingly fast in dev when I save and see the changes, but I haven't tested it with a lot of components yet. And actually, SPAs feel faster than sites like these, and if you want something actually good for templating, you should use tera and extend it.
-
-
 
 > You can view the source code [here](https://github.com/Tnixc/simple)(it's really bad).
 > This article is super outdated now, check out the readme on the github for updates!

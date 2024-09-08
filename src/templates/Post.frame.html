@@ -1,15 +1,14 @@
 <Layout>
-    <a href="/writing.html"
-        class="block py-4 font-mono hover:underline w-fit underline-offset-[6px] decoration-2">[&lt;back]</a>
-    <h1 class="text-3xl font-grotesk">${title}</h1>
-    <p class="pt-1 text-neutral-500">Published ${date}</p>
-    <p class="pt-3">
-        ${description}
-    </p>
-    <div class="py-8">
-        <hr class="border-[1.5px] border-neutral-400/50" />
-    </div>
-    <article class="prose">
-        ${--content}
-    </article>
+  <a
+    href="/writing.html"
+    class="block py-4 font-mono hover:underline w-fit underline-offset-[6px] decoration-2"
+    >[&lt;back]</a
+  >
+  <h1 class="text-3xl font-grotesk">${title}</h1>
+  <p class="pt-1 text-neutral-500">Published ${date}</p>
+  <p class="pt-3">${description}</p>
+  <div class="py-8">
+    <hr class="border-[1.5px] border-neutral-400/50" />
+  </div>
+  <article class="prose">${--content}</article>
 </Layout>

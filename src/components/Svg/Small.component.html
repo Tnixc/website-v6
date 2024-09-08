@@ -1,21 +1,41 @@
 <style>
-#small-logo{
-  clip-path: polygon(100% 0, 100% 100%, calc(0% + 12px) 100%, 0 calc(100% - 12px), 0 0);
-}
-#small-logo p {
-    background: linear-gradient(to left, #ef4444E0 20%, #ef4444A0 20%, #ef4444A0 40%, #ef444470 40%,#ef444470 60%, #ef444440 60%, #ef444440 60%,#ef444440 80%, #ef444410 80%);
+  #small-logo {
+    clip-path: polygon(
+      100% 0,
+      100% 100%,
+      calc(0% + 12px) 100%,
+      0 calc(100% - 12px),
+      0 0
+    );
+  }
+  #small-logo p {
+    background: linear-gradient(
+      to left,
+      #ef4444e0 20%,
+      #ef4444a0 20%,
+      #ef4444a0 40%,
+      #ef444470 40%,
+      #ef444470 60%,
+      #ef444440 60%,
+      #ef444440 60%,
+      #ef444440 80%,
+      #ef444410 80%
+    );
     filter: saturate(0.6);
-}
+  }
 </style>
 <div
   class="${class} bg-yellow-600/50 h-12 w-40 flex items-center group"
-  id="small-logo"
->
+  id="small-logo">
   <div class="grid place-items-center w-12 h-12">
-    <div class="relative z-40 w-6 h-6 rounded-full border-4 border-yellow-600 bg-neutral-200"></div>
+    <div
+      class="relative z-40 w-6 h-6 rounded-full border-4 border-yellow-600 bg-neutral-200"></div>
   </div>
   <div class="block h-12 w-[1px] bg-amber-800/50"></div>
   <div class="block h-12 w-[2px]"></div>
   <div class="block h-12 w-[1px] bg-amber-800/50"></div>
-  <p class="text-2xl px-1 text-amber-950/80 mr-2 ml-auto shadow-[0_0_0_2px_#ef4444] select-none group-hover:animate-pulse">TNIXC</p>
+  <p
+    class="text-2xl px-1 text-amber-950/80 mr-2 ml-auto shadow-[0_0_0_2px_#ef4444] select-none group-hover:animate-pulse">
+    TNIXC
+  </p>
 </div>
