@@ -1,5 +1,13 @@
 [
   {
+    "title": "How do I learn stuff that's not going to be tested?",
+    "description": "And I also never really took notes.",
+    "link": "./content/learning.html",
+    "date": "14/09/2024",
+    "--entry-path": "/post/learning.md",
+    "--result-path": "/content/learning.html"
+  },
+  {
     "title": "Techniques to get something done",
     "description": "Very rarely do I do this, actually.",
     "link": "./content/rules_stuff_done.html",
