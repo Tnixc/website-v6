@@ -74,7 +74,7 @@
   }
 
   em {
-    @apply not-italic underline underline-offset-[3px] decoration-2 text-black;
+    @apply not-italic underline underline-offset-[3px] decoration-2 text-black decoration-black/20;
   }
 
   a {
@@ -83,12 +83,12 @@
 
   a::before {
     content: "[";
-    opacity: 0.5;
+    @apply text-black/50;
   }
 
   a::after {
     content: "]";
-    opacity: 0.5;
+    @apply text-black/50;
   }
 
   blockquote {
