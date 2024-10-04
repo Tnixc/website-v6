@@ -1,9 +1,21 @@
 [
   {
     "title": "simple",
-    "description": "A simple web-component-ish assembler written in rust that's built basically only using regex to assemble static sites with markdown rendering. I wrote it just for this website. There's a blog post about it [here](/content/simple.html). This is the one project I actually do really want to work on for a long time.",
+    "description": "A component based static site generator written in rust. I wrote it to make this website.",
     "link": "Tnixc/simple",
     "tags": "rust/cli"
+  },
+  {
+    "title": "Toki",
+    "description": "A simple time tracking app for macOS, written with swiftUI. Reminds you to clock out, take breaks etc.",
+    "link": "Tnixc/Toki",
+    "tags": "swift[WIP]"
+  },
+  {
+    "title": "ZCore",
+    "description": "A basic assembly parser and cpu 'emulator' with 256 bytes of ram and instructions, 8 registers. Written in zig, very much WIP",
+    "link": "Tnixc/ZCore",
+    "tags": "zig[WIP]"
   },
   {
     "title": "lightscrape-rs",
