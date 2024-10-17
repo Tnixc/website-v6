@@ -32,7 +32,7 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: url("/assets/bg.jpeg");
+  background: url("/assets/bg.webp");
   background-size: cover;
   background-position: center;
   z-index: -1;
