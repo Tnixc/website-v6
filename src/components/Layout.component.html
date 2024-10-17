@@ -1,13 +1,22 @@
 <!doctype html>
 <html lang="en">
   <Layout:Head title="${title}" />
+
   <body
-    class="flex flex-col p-2 lg:flex-row lg:pt-20 bg-neutral-200 selection:bg-stone-400/60">
+    class="flex flex-col p-2 lg:flex-row lg:pt-20 bg-neutral-200 selection:bg-stone-400/60"
+  >
     <Layout:Nav />
     <main class="p-6 w-full md:max-w-screen-md inv">
       <slot></slot>
       <Layout:Footer />
     </main>
-    <div class="w-full max-w-0 transition-all duration-500 xl:max-w-44"></div>
+    <div class="w-full flex-1"></div>
+    <div class="m-8 space-y-4">
+      <img
+        class="block w-full max-w-80 h-fit mix-blend-color-burn opacity-50 p-1 border-2 border-black shadow-[0.75rem_0.75rem_0_#00000030]"
+        src="/assets/flowers.gif"
+      />
+      <p class="font-mono tracking-wider opacity-20">[Dreaming]</p>
+    </div>
   </body>
 </html>

@@ -28,6 +28,18 @@
   }
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("/assets/bg.jpeg");
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  mix-blend-mode: overlay;
+  opacity: 0.5;
+}
+
 * {
   font-feature-settings:
     "cv13" off,
@@ -83,12 +95,12 @@
 
   a::before {
     content: "[";
-    @apply text-black/50;
+    @apply text-black/50 font-normal;
   }
 
   a::after {
     content: "]";
-    @apply text-black/50;
+    @apply text-black/50 font-normal;
   }
 
   blockquote {
