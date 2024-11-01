@@ -16,14 +16,6 @@
     "--result-path": "/content/rules_stuff_done.html"
   },
   {
-    "title": "Simple - Building a component-based static site assembler",
-    "description": "I should have just used Astro. Also SPAs are faster.",
-    "link": "./content/simple.html",
-    "date": "18/07/2024",
-    "--entry-path": "/post/simple.md",
-    "--result-path": "/content/simple.html"
-  },
-  {
     "title": "The history of tnixc.space",
     "description": "I'm not proud of what it was, but I'm proud of how far its come.",
     "link": "./content/history.html",
