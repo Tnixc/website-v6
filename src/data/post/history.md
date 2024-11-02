@@ -26,10 +26,16 @@ After being satisfied with v3, it took three months before starting v4. This ver
 
 ## v5
 
-Two months later, I began v5. This version featured a significant design change with a light mode and minimal animations. It was my first time using Svelte and SvelteKit, and I enjoyed the process. The hacky projects window animation and the shadow aesthetics turned out well. Some design elements here are similar to the current version (v6). Check out [v5.tnixc.space](https://v5.tnixc.space).
+Two months later, I began v5. This version featured a significant design change with a light mode and minimal animations. It was my first time using Svelte and SvelteKit, and I enjoyed the process. The hacky projects window animation and the shadow aesthetics turned out well. Some design elements here are similar to v6. Check out [v5.tnixc.space](https://v5.tnixc.space).
 
 <img height="1056" width="1775" alt="v5" src="https://utfs.io/f/b16bbe41-e49a-4b61-8368-fa23a47ab181-237ujf.png" />
 
+## v6
+
+I started this just 2 months later. I really like it. It's really quite similar to the current version.
+
+<img width="1775" src="https://utfs.io/f/LBZvH38TQ23fWlnSvbakbxnqofa62037Nd9AGCXilYP8wUtQ" />
+
 ---
 
-Overall, I'm happy with how the recent editions have turned out. This isn't the end—there will definitely be more iterations in the future, and maybe this version will appear in a blog post in a few months.
+I would call the current site v6.1, as it's basically the same under the hood. Overall, I'm happy with how the recent editions have turned out. This isn't the end—there will definitely be more iterations in the future, and maybe this version will appear in a blog post in a few months.

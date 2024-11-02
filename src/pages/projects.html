@@ -1,19 +1,29 @@
-<Layout title="[projects]">
-  <h1 class="font-mono text-3xl">[projects]</h1>
-  <p class="pt-3 text-neutral-700">
-    You can find more of these on my
-    <a href="https://github.com/Tnixc" class="inline-flex hover:underline underline-offset-[6px] decoration-2">
-      [github]
-      <Svg:ArrowUpRight class="w-4 h-4" />
-    </a>
-  </p>
-  <div class="flex flex-col gap-4 py-10"><-Template{Projects} /></div>
-  <details>
-    <summary class="select-none">more projects</summary>
-    <article class="prose">
-      <markdown>
-        - [elemental](https://github.com/Tnixc/elemental) - Simple web app for basic stoichiometry calculations
-      </markdown>
-    </article>
-  </details>
+<Layout title="projects">
+  <style>
+    nav :not([projects]) {
+      opacity: 0.5;
+      filter: grayscale(1);
+    }
+  </style>
+  <article class="prose">
+    <!-- prettier-ignore -->
+    <markdown>
+# projects
+
+You can find all of my projects on my [github](https://github.com/tnixc). I've mostly been building rust clis, web apps, and whatever I happen to find interesting.
+
+---
+
+Here's a list of notable projects:
+- [ Zcore ](https://github.com/tnixc/zcore) - An assembly parser and cpu emulator written in zig. Wip.
+- [ Simple ](https://github.com/tnixc/simple) - A *simple* static site generator/component based html inliner written in rust. I wrote it to build this website. Very buggy, but it has cool features like bi-directional editing.
+- [ Replacer ](https://github.com/tnixc/replacer) - A cli to replace text recursively in files or from stdin to stdout. Written in rust, of course.
+- [ lightscrape-rs ](https://github.com/tnixc/lightscrape-rs) - A cli to asynchronously download lightnovels from certain websites, and compile them into an epub. 
+- [ Toki ](https://github.com/tnixc/toki) - A macOS app usage tracking app written in swift. Wip.
+- [ osu-radio ](https://github.com/team-btmc/osu-radio) - A music player for playing songs from your osu! library. I'm a major contributor and designer.
+- [ edo ](https://github.com/tnixc/edo) - A colorscheme I created and use. It's a mix of tokyonight and catppuccin. All the ports are made with replacing hex codes from catppuccin's ports.
+- [ nix-config ](https://github.com/tnixc/nix-config) - My nix-darwin configuration. I spend way too much time on this.
+- [ tnixc.space ](https://github.com/tnixc/website-v6) - This website. This is version 6.1 and all the previous versions are also on github.
+        </markdown>
+  </article>
 </Layout>

@@ -1,5 +1,16 @@
-<Layout title="[writing]">
-  <h1 class="font-mono text-3xl">[writing]</h1>
-  <p class="pt-3 text-neutral-700">I don't write often, unfortunately.</p>
-  <div class="flex flex-col gap-4 py-10"><-Template{Post} /></div>
+<Layout title="writing">
+  <style>
+    nav :not([writing]) {
+      opacity: 0.5;
+      filter: grayscale(1);
+    }
+  </style>
+  <div class="prose">
+    <markdown> # writing I don't write often, unfortunately. I'll try to write more. </markdown>
+  </div>
+  <div
+    class="flex flex-col relative gap-4 pt-10 before:absolute before:bg-blue-600/10 before:top-12 before:bottom-2 before:-left-4 before:w-px before:animate-pulse"
+  >
+    <-Template{Post} />
+  </div>
 </Layout>

@@ -1,12 +1,15 @@
-<Layout title="[writing]/${title}">
-  <a href="/writing.html" class="block py-4 font-mono hover:underline w-fit underline-offset-[6px] decoration-2"
-    >[&lt;back]</a
-  >
-  <h1 class="text-3xl font-grotesk">${title}</h1>
-  <p class="pt-1 text-neutral-500">Published ${date}</p>
+<Layout title="writing/${title}">
+  <style>
+    nav :not([writing]) {
+      opacity: 0.5;
+      filter: grayscale(1);
+    }
+  </style>
+  <h1 class="text-3xl">${title}</h1>
+  <p class="pt-2 text-stone-500">Published ${date}</p>
   <p class="pt-3">${description}</p>
   <div class="py-8">
-    <hr class="border-[1.5px] border-neutral-400/50" />
+    <hr class="border-px border-blue-700/20" />
   </div>
   <article class="prose pb-16">${--content}</article>
   <div class="min-h-96">
