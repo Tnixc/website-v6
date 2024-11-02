@@ -1,8 +1,6 @@
-This site is entirely static, just good old html files.
+This site is entirely static, just good old html files, and some script tags too.
 
-In designing this site, I realized that I unintentionally copied [ryanccn's website](https://ryanccn.dev/)'s layout. It's just the best layout I guess?
-
-This site's aesthetic was also inspired by [Commit Mono's website](https://commitmono.com/), [0x57](https://www.0x57.dev/), and [sora.sh](https://sora.sh).
+This site's design was inspired by [ zed.dev ](https://zed.dev) and [exa.ai](https://exa.ai).
 
 You can view the source code [here](https://github.com/tnixc/website-v6).
 
