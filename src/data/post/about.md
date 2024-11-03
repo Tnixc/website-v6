@@ -1,6 +1,6 @@
 This site is entirely static, just good old html files, and some script tags too.
 
-This site's design was inspired by [ zed.dev ](https://zed.dev) and [exa.ai](https://exa.ai).
+This site's design was inspired by [zed.dev](https://zed.dev) and [exa.ai](https://exa.ai).
 
 You can view the source code [here](https://github.com/tnixc/website-v6).
 
