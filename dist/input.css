@@ -59,7 +59,7 @@ body {
   }
 
   strong {
-    @apply not-italic font-semibold bg-amber-500/30 text-stone-800;
+    @apply not-italic font-semibold bg-lime-600/20 text-stone-900;
   }
 
   em {
@@ -67,7 +67,7 @@ body {
   }
 
   a {
-    @apply hover:underline underline-offset-4 decoration-2 text-blue-600 decoration-blue-600/50 relative mr-1 bg-blue-600/10;
+    @apply hover:underline underline-offset-4 decoration-2 text-blue-600 decoration-blue-600/50 relative mr-1 bg-blue-600/[4%];
   }
 
   blockquote {
