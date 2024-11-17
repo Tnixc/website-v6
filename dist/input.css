@@ -27,11 +27,11 @@ body {
 }
 .prose {
   h1 {
-    @apply text-4xl pt-8;
+    @apply lg:text-4xl text-3xl pt-8;
   }
 
   h2 {
-    @apply text-3xl pt-7;
+    @apply lg:text-3xl text-2xl pt-7;
   }
 
   h3 {
