@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@config "../../tailwind.config.js"
+    
 
 @layer base {
   @font-face {
@@ -22,9 +24,11 @@
 html {
   background: #fbf7ec;
 }
+
 body {
   font-family: "Sentient", "serif";
 }
+
 .prose {
   h1 {
     @apply lg:text-4xl text-3xl pt-8;
@@ -111,7 +115,7 @@ body {
   code::after,
   code::before {
     content: "`";
-    opacity: 0.5;
+    @apply opacity-50
   }
 
   code,
@@ -125,7 +129,7 @@ body {
   }
 
   pre::-webkit-scrollbar {
-    display: none;
+      @apply hidden
   }
 
   pre {
