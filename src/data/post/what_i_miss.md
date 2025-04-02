@@ -1,6 +1,6 @@
 When I was a kid, I had to learn of a Chinese poet who was sent to work in far away from his family, and described his sense of longing(思念), and feeling comfort that they were all looking at the same moon at night. I had no concept of such an emotion at that time. Now I do. Still a pretty weird thing to teach to 10 year-olds though.
 
-Winter is almost upon us, and as I was lying cozily in bed under the warm glow of a light bar I bought from home, I was suddenly very homesick, which made me reflect on *why* I'm homesick. What experiences do I really miss? This year, for the first year in my life, I've spent more time living in Canada than in Hong Kong, with my family. I've learned a lot about myself(another post coming soon), and the experiences I value.
+Winter is almost upon us, and as I was lying cozily in bed under the warm glow of a light bar I bought from home, I was suddenly very homesick, which made me reflect on _why_ I'm homesick. What experiences do I really miss? This year, for the first year in my life, I've spent more time living in Canada than in Hong Kong, with my family. I've learned a lot about myself(another post coming soon), and the experiences I value.
 
 Here's what I miss, in no particular order:
 
@@ -17,4 +17,3 @@ Am I feeling regretful? No. This is just an acknowledgment that this is what I m
 Reflecting on those experiences, I can't help but think of the fact that people of love I love will die one day. Maybe I'll look back at these experiences just the same way, however many more times intense. I'm not looking forward to finding out.
 
 As I grow up, I will only experiences less and less of these experiences, especially so if I settle down in another country, which is quite likely. It's so sad, but here's to treasuring these 'ordinary' experiences even more.
-
