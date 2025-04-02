@@ -1,26 +1,26 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@config "../../tailwind.config.js"
-    
+@import "tailwindcss";
 
-@layer base {
-  @font-face {
-    font-family: "Sentient";
-    font-style: normal;
-    font-weight: 200 700;
-    font-display: swap;
-    src: url("./fonts/Sentient-Variable.woff2") format("woff2");
-  }
-
-  @font-face {
-    font-family: "Sentient";
-    font-style: italic;
-    font-weight: 200 700;
-    font-display: swap;
-    src: url("./fonts/Sentient-VariableItalic.woff2") format("woff2");
-  }
+@theme {
+  --font-serif: "Sentient", "serif";
+  --color-cream: #FBF7EC;
 }
+
+@font-face {
+  font-family: "Sentient";
+  font-style: normal;
+  font-weight: 200 700;
+  font-display: swap;
+  src: url("./fonts/Sentient-Variable.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Sentient";
+  font-style: italic;
+  font-weight: 200 700;
+  font-display: swap;
+  src: url("./fonts/Sentient-VariableItalic.woff2") format("woff2");
+}
+
 html {
   background: #fbf7ec;
 }
@@ -115,7 +115,7 @@ body {
   code::after,
   code::before {
     content: "`";
-    @apply opacity-50
+    @apply opacity-50;
   }
 
   code,
@@ -129,7 +129,7 @@ body {
   }
 
   pre::-webkit-scrollbar {
-      @apply hidden
+    @apply hidden;
   }
 
   pre {
