@@ -1,2 +1,4 @@
+
+- [29/09/2025] Obsidian might have the best PDF reader I've ever used. Preview is also up there but Obsidian's theming is really incredible.
 - [29/09/2025] I don't like liquid glass. I'm considering switching to android in 2-3 years once my iphone 13 pro gives out just to avoid it.
 - [29/09/2025] [Pixeldrain](https://pixeldrain.com/) is the one of the best pieces of software I've ever used
