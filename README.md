@@ -1,6 +1,6 @@
 # Website v6.1
 
-Edition 6 of https://tnixc.space
+Edition 6 of https://enochlau.com
 
 Built with my very own static site assembler [simple](https://github.com/tnixc/simple).
 

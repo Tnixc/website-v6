@@ -1,5 +1,5 @@
 async function updateSong() {
-  const res = await fetch("https://api.tnixc.space/api/current-song");
+  const res = await fetch("https://api.enochlau.com/api/current-song");
   const data = await res.json();
   const html = {
     status: document.getElementById("song-status"),
