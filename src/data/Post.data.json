@@ -1,42 +1,26 @@
 [
   {
-    "title": "What do I miss from home?",
-    "description": "Everything. Really",
-    "link": "./content/what_i_miss.html",
-    "date": "04/10/2024",
-    "--entry-path": "/post/what_i_miss.md",
-    "--result-path": "/content/what_i_miss.html"
+    "title": "Some interesting details about this site",
+    "description": "I care about the details very much.",
+    "link": "./content/site_details.html",
+    "date": "05/05/2025",
+    "--entry-path": "/post/site_details.md",
+    "--result-path": "/content/site_details.html"
   },
   {
-    "title": "How do I learn stuff that's not going to be tested?",
-    "description": "And I also never really took notes.",
-    "link": "./content/learning.html",
-    "date": "14/09/2024",
-    "--entry-path": "/post/learning.md",
-    "--result-path": "/content/learning.html"
+    "title": "Software I use",
+    "description": "for macOS",
+    "link": "./content/software_i_use.html",
+    "date": "03/05/2025",
+    "--entry-path": "/post/software_i_use.md",
+    "--result-path": "/content/software_i_use.html"
   },
   {
-    "title": "Techniques to get something done",
-    "description": "Very rarely do I do this, actually.",
-    "link": "./content/rules_stuff_done.html",
-    "date": "07/09/2024",
-    "--entry-path": "/post/rules_stuff_done.md",
-    "--result-path": "/content/rules_stuff_done.html"
-  },
-  {
-    "title": "The history of tnixc.space",
-    "description": "I'm not proud of what it was, but I'm proud of how far its come.",
+    "title": "The History of this Site",
+    "description": "it's changed a lot, but it's not the end.",
     "link": "./content/history.html",
-    "date": "18/07/2024",
+    "date": "30/04/2025",
     "--entry-path": "/post/history.md",
     "--result-path": "/content/history.html"
-  },
-  {
-    "title": "About this site",
-    "description": "No javascript used*",
-    "link": "./content/about.html",
-    "date": "19/07/2024",
-    "--entry-path": "/post/about.md",
-    "--result-path": "/content/about.html"
   }
 ]
