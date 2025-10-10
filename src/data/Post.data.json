@@ -1,9 +1,17 @@
 [
   {
+    "title": "Loading screen tips for life",
+    "description": "Lessons by osmosis",
+    "link": "./content/loading_screen_tips_for_life.html",
+    "date": "Oct 9 2025",
+    "--entry-path": "/post/loading_screen_tips_for_life.md",
+    "--result-path": "/content/loading_screen_tips_for_life.html"
+  },
+  {
     "title": "Unsorted thoughts",
     "description": "this is just bad twitter, isn't it?.",
     "link": "./content/unsorted_thoughts.html",
-    "date": "29/09/2025",
+    "date": "Sep 29 2025",
     "--entry-path": "/post/unsorted_thoughts.md",
     "--result-path": "/content/unsorted_thoughts.html"
   },
@@ -11,7 +19,7 @@
     "title": "Some interesting details about this site",
     "description": "I care about the details very much.",
     "link": "./content/site_details.html",
-    "date": "05/05/2025",
+    "date": "May 5 2025",
     "--entry-path": "/post/site_details.md",
     "--result-path": "/content/site_details.html"
   },
@@ -19,7 +27,7 @@
     "title": "Software I use",
     "description": "for macOS",
     "link": "./content/software_i_use.html",
-    "date": "03/05/2025",
+    "date": "May 3 2025",
     "--entry-path": "/post/software_i_use.md",
     "--result-path": "/content/software_i_use.html"
   },
@@ -27,7 +35,7 @@
     "title": "The History of this Site",
     "description": "it's changed a lot, but it's not the end.",
     "link": "./content/history.html",
-    "date": "30/04/2025",
+    "date": "Apr 30 2025",
     "--entry-path": "/post/history.md",
     "--result-path": "/content/history.html"
   }
