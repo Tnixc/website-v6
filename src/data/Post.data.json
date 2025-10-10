@@ -1,11 +1,11 @@
 [
   {
-    "title": "Loading screen tips for life",
+    "title": "Personal Operating Manual",
     "description": "Lessons by osmosis",
-    "link": "./content/loading_screen_tips_for_life.html",
+    "link": "./content/personal_operating_manual.html",
     "date": "Oct 9 2025",
-    "--entry-path": "/post/loading_screen_tips_for_life.md",
-    "--result-path": "/content/loading_screen_tips_for_life.html"
+    "--entry-path": "/post/personal_operating_manual.md",
+    "--result-path": "/content/personal_operating_manual.html"
   },
   {
     "title": "Unsorted thoughts",

@@ -2,7 +2,7 @@ Just because I know these things doesn’t mean I do them. I’ve read them in b
 
 None of this is comprehensive or perfectly sourced. Some I’ve tried, some I’ve ignored, some I just believe. If you want to add sources, message me. I try to be aware of my own biases and trusts in data, but finding good sources is really hard.
 
-I suggest actually thinking about your life on a longer time scale once in a while, because, even if you think so right now, you are probably _not_ gonna kill yourself.
+I suggest actually thinking about your life on a longer timescale once in a while, because, even if you think so right now, you are probably _not_ gonna kill yourself.
 
 ---
 
