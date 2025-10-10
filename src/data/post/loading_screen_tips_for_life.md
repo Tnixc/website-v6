@@ -39,7 +39,7 @@ You only get one body for life.
 
 - Exercise daily: even a walk counts
 - Go outside: sunlight regulates circadian rhythm and mood
-- Eat to meet caloric goals, not until you feel “full”
+- Eat to meet caloric goals, not until you feel "full", it's very easy to eat more than you need to and gain weight.
 - Floss daily and visit the dentist yearly
 - Never smoke, vape, or use recreational drugs
 - Alcohol: no safe dose, per [WHO](https://www.who.int/europe/news/item/04-01-2023-no-level-of-alcohol-consumption-is-safe-for-our-health). I get kind of upset when my parents drink because it reminds me that they are just gonna die sooner.
@@ -55,19 +55,19 @@ You only get one body for life.
 - Gratitude practice might not increase happiness ([Dynomight](https://dynomight.net/gratitude/)) but probably wouldn't hurt
 - When anxious: imagine the worst-case scenario. It’s rarely catastrophic. This has also made me realize some actions are zero-cost
 
-I've heard writing is good for you too. I'm not sure why, and I haven't been doing that much, but yeah?
+I've heard writing is good for you too. I'm not sure why, wondering if anyone has data on this.
 
 #### Your time
 
 Finally, and most importantly your time. Every time you do something, just think of the opportunity cost. If I play a video game for an hour that's 4% of my day that I could have spent learning something new.
 
-If you don't have anything to do, you **will** waste your time. This is incredibly difficult not to do. Try anyway.
+If you don't have anything to do, it is very easy to waste your time. I tend to waste time without structure.
 
 ---
 
 ## Mindset
 
-I believe in grindmaxxing.
+I believe in grindmaxxing. Be aware of burnout, try to catch it early.
 
 - Consistency >> rare intensity
 - Accountability partners
@@ -97,4 +97,4 @@ If you have any book recommendations let me know.
 
 ## Meta
 
-If something helps you live better, keep it. If not, discard it.
+If something helps you live better, keep it. If not, discard it. I probably don't even effectively follow half the advice on this list, but still, you are better off knowing this information than not.
