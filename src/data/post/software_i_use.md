@@ -1,3 +1,8 @@
+---
+title: Software I use
+description: for macOS
+date: May 3 2025
+---
 # Software I use
 
 Here's a comprehensive list of the software I use daily on macOS.

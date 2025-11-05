@@ -1,3 +1,8 @@
+---
+title: Some interesting details about this site
+description: I care about the details very much.
+date: May 5 2025
+---
 I care about the details very much. This site has gone through many iterations, and each version has been a learning experience.
 
 ## Technical Details

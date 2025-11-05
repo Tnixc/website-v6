@@ -1,3 +1,9 @@
+---
+title: Personal Operating Manual
+description: Lessons by osmosis
+date: Oct 9 2025
+---
+
 Just because I know these things doesn’t mean I do them. I’ve read them in blog posts, tweets, and conversations with LLMs: take that how you will.
 
 None of this is comprehensive or perfectly sourced. Some I’ve tried, some I’ve ignored, some I just believe. If you want to add sources, message me. I try to be aware of my own biases and trusts in data, but finding good sources is really hard.
