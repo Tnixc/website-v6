@@ -1,5 +1,5 @@
 <div class="mt-10">
-  <div class="flex relative gap-2 items-center p-5 pr-10 bg-cream">
+  <div class="flex relative gap-2 items-center">
     <span
       id="song-status"
       class="h-8 w-1 outline-white/50 -outline-offset-1 outline-1 data-[playing=true]:bg-lime-400 data-[playing=true]:animate-pulse data-[playing=false]:bg-red-400"
@@ -9,9 +9,12 @@
       class="bg-center bg-no-repeat bg-contain w-12 h-12 outline-stone-500/40 -outline-offset-2 outline-2"
     ></div>
     <div class="pl-2">
-      <p class="text-stone-600">
-        I'm listening to <span id="song-title">Song Title</span> by
-        <span id="song-artist">Artist Name</span>.
+      <div id="song-info">
+        I'm listening to <span class="font-bold text-stone-800" id="song-title">Song Title</span> by
+        <span class="font-bold text-stone-800" id="song-artist">Artist Name</span>
+      </div>
+      <p id="not-listening" class="text-stone-600 hidden">
+       <code>(* ´ ｰ`) ZZzz</code> -- not listening to anything
       </p>
     </div>
   </div>
