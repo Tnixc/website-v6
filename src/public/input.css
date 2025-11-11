@@ -27,6 +27,10 @@ html {
 
 body {
   font-family: "Sentient", "serif";
+  background-image:
+    linear-gradient(to right, rgba(168, 162, 158, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(168, 162, 158, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
 .prose {
