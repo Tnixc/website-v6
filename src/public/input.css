@@ -66,16 +66,20 @@ body {
     @apply text-stone-600 pt-3 leading-relaxed;
   }
 
+  mark {
+    @apply bg-amber-600/10 text-stone-900;
+  }
+
   strong {
-    @apply not-italic font-semibold bg-lime-600/20 text-stone-900;
+    @apply not-italic font-medium text-stone-900;
   }
 
   em {
-    @apply not-italic underline underline-offset-4 decoration-2 text-stone-800 decoration-stone-700/20;
+    @apply decoration-2 text-stone-950;
   }
 
   a {
-    @apply hover:underline underline-offset-4 decoration-2 text-blue-600 decoration-blue-600/50 relative bg-blue-600/[4%];
+    @apply hover:underline underline-offset-4 decoration-2 text-blue-600 decoration-blue-600/50 relative bg-blue-600/10;
   }
 
   blockquote {

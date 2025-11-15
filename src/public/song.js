@@ -11,12 +11,17 @@ async function updateSong() {
   };
 
   html.status.setAttribute("data-playing", data.now_playing);
+  console.log(data);
 
   if (data.now_playing) {
     html.cover.style.backgroundImage = `url(${data.image_url})`;
     html.title.innerText = data.name;
     html.artist.innerHTML = data.artist;
-    html.cover.classList.remove("hidden");
+    if (data.image_url.length > 2) {
+      html.cover.classList.remove("hidden");
+    } else {
+      html.cover.classList.add("hidden");
+    }
     html.songInfo.classList.remove("hidden");
     html.notListening.classList.add("hidden");
   } else {
