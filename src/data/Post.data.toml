@@ -2,6 +2,6 @@ files = [
   "personal_operating_manual.md",
   "unsorted_thoughts.md",
   "site_details.md",
-  "software_i_use.md",
+  # "software_i_use.md",
   "history.md"
 ]
