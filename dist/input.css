@@ -2,6 +2,7 @@
 
 @theme {
   --font-serif: "Sentient", "serif";
+  --font-mono: "Lilex", ui-monospace;
   --color-cream: #fbf7ec;
 }
 
@@ -19,6 +20,14 @@
   font-weight: 200 700;
   font-display: swap;
   src: url("./fonts/Sentient-VariableItalic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Lilex";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./fonts/Lilex-Regular.woff2") format("woff2");
 }
 
 html {
@@ -81,6 +90,9 @@ body {
   a {
     @apply hover:underline underline-offset-4 decoration-2 text-blue-600 decoration-blue-600/50 relative bg-blue-600/10;
   }
+  a[data-footnote-ref] {
+    @apply font-mono;
+  }
 
   blockquote {
     @apply border-l-4 border-stone-400 pl-4 italic text-stone-600 pb-4;
@@ -117,23 +129,12 @@ body {
   }
 
   code {
-    @apply text-black bg-stone-400/50;
-  }
-
-  code::after,
-  code::before {
-    content: "`";
-    @apply opacity-50;
+    @apply text-black bg-stone-400/20 py-px px-1.5 inline-block -translate-y-px;
   }
 
   code,
   pre {
     @apply text-sm;
-  }
-
-  pre code::after,
-  pre code::before {
-    content: "";
   }
 
   pre::-webkit-scrollbar {
