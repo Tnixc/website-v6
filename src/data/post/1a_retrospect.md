@@ -69,7 +69,7 @@ Even though university was a totally fresh experience, these 4 months have reall
 
 [^5]: I gotta fix this fr, but i got fear of failure and commitment issues etc
 
-[^6]: CAD $82.00 +HST, with rental shoes.
+[^6]: CAD $82.00 +HST, with rental shoes. For the whole 4 months!
 
 [^7]: The _Physical Activities Complex_, UWaterloo's gym. It's on campus and a 2 minute walk from my residence.
 
