@@ -51,7 +51,7 @@ Another goal I had was to eat more. Now, you'd think this would be easy consider
 
 My course-load will be significantly heavier next term and so it's not looking like I will have a lot of free time next term, but that remains to be seen. Not only that, but I'll also be searching for coop jobs, which is a whole other ordeal in itself. (please hire me)
 
-It's interesting to think that 1/8th of my study terms are over. One down, seven to go.
+Even though university was a totally fresh experience, these 4 months have really flown by. It's interesting to think that 1/8th of my study terms are over. One down, seven to go.
 
 ---
 
