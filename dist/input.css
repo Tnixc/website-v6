@@ -3,7 +3,32 @@
 @theme {
   --font-serif: "Sentient", "serif";
   --font-mono: "Lilex", ui-monospace;
-  --color-cream: #fbf7ec;
+
+  --color-bg: light-dark(#fbf7ec, #161617);
+  --color-bg-grid: light-dark(rgb(168 162 158 / 0.05), rgb(68 68 72 / 0.2));
+
+  --color-text-primary: light-dark(#1c1917, #c9c7cd);
+  --color-text-secondary: light-dark(#57534e, #9f9ca6);
+  --color-text-tertiary: light-dark(#78716c, #8b8693);
+
+  --color-accent: light-dark(#2563eb, #92a2d5);
+  --color-accent-bg: light-dark(rgb(37 99 235 / 0.1), rgb(146 162 213 / 0.1));
+  --color-accent-subtle: light-dark(
+    rgb(37 99 235 / 0.5),
+    rgb(146 162 213 / 0.5)
+  );
+
+  --color-border: light-dark(rgb(37 99 235 / 0.1), rgb(146 162 213 / 0.1));
+  --color-border-strong: light-dark(#a8a29e, #6c6874);
+
+  --color-mark-bg: light-dark(rgb(217 119 6 / 0.1), rgb(230 185 157 / 0.15));
+  --color-code-bg: light-dark(rgb(168 162 158 / 0.2), rgb(68 68 72 / 0.4));
+  --color-table-bg: light-dark(rgb(168 162 158 / 0.3), rgb(68 68 72 / 0.3));
+  --color-table-border: light-dark(
+    rgb(168 162 158 / 0.5),
+    rgb(108 104 116 / 0.5)
+  );
+  --color-img-bg: light-dark(rgb(168 162 158 / 0.5), rgb(49 49 52 / 0.5));
 }
 
 @font-face {
@@ -31,71 +56,72 @@
 }
 
 html {
-  background: #fbf7ec;
+  color-scheme: light dark;
+  background: var(--color-bg);
 }
 
 body {
   font-family: "Sentient", "serif";
   background-image:
-    linear-gradient(to right, rgba(168, 162, 158, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(168, 162, 158, 0.05) 1px, transparent 1px);
+    linear-gradient(to right, var(--color-bg-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-bg-grid) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
 .prose {
   h1 {
-    @apply lg:text-4xl text-3xl pt-8;
+    @apply lg:text-4xl text-3xl pt-8 text-text-primary;
   }
 
   h2 {
-    @apply lg:text-3xl text-2xl pt-7;
+    @apply lg:text-3xl text-2xl pt-7 text-text-primary;
   }
 
   h3 {
-    @apply text-2xl pt-6;
+    @apply text-2xl pt-6 text-text-primary;
   }
 
   h4 {
-    @apply text-xl pt-5;
+    @apply text-xl pt-5 text-text-primary;
   }
 
   h5 {
-    @apply text-lg pt-4 font-[420];
+    @apply text-lg pt-4 font-[420] text-text-primary;
   }
 
   h6 {
-    @apply text-sm pt-3;
+    @apply text-sm pt-3 text-text-primary;
   }
 
   hr {
-    @apply border-blue-700/10 mt-7 border-[0.5px];
+    @apply mt-7 border-[0.5px] border-border;
   }
 
   p {
-    @apply text-stone-600 pt-3 leading-relaxed;
+    @apply pt-3 leading-relaxed text-text-secondary;
   }
 
   mark {
-    @apply bg-amber-600/10 text-stone-900;
+    @apply bg-mark-bg text-text-primary;
   }
 
   strong {
-    @apply not-italic font-medium text-stone-900;
+    @apply not-italic font-medium text-text-primary;
   }
 
   em {
-    @apply decoration-2 text-stone-950;
+    @apply decoration-2 text-text-primary;
   }
 
   a {
-    @apply hover:underline underline-offset-4 decoration-2 text-blue-600 decoration-blue-600/50 relative bg-blue-600/10;
+    @apply underline underline-offset-4 decoration-2 relative text-accent bg-accent-bg hover:decoration-accent-subtle decoration-transparent;
   }
   a[data-footnote-ref] {
     @apply font-mono;
   }
 
   blockquote {
-    @apply border-l-4 border-stone-400 pl-4 italic text-stone-600 pb-4;
+    @apply border-l-4 pl-4 italic pb-4 border-border-strong text-text-secondary;
   }
 
   ul {
@@ -107,7 +133,7 @@ body {
   }
 
   li {
-    @apply pt-1 text-stone-700;
+    @apply pt-1 text-text-tertiary;
   }
 
   li > ul,
@@ -116,20 +142,20 @@ body {
   }
 
   table {
-    @apply w-full border-2 border-stone-400/50 mt-6;
+    @apply w-full border-2 mt-6 border-table-border;
   }
 
   th,
   td {
-    @apply border border-stone-400/50 px-4 py-2 text-left;
+    @apply border px-4 py-2 text-left border-table-border;
   }
 
   th {
-    @apply bg-stone-400/30 font-semibold;
+    @apply font-semibold bg-table-bg;
   }
 
   code {
-    @apply text-black bg-stone-400/20 py-px px-1.5 inline-block -translate-y-px;
+    @apply py-px px-1.5 inline-block -translate-y-px text-text-primary bg-code-bg;
   }
 
   code,
@@ -146,10 +172,10 @@ body {
   }
 
   img {
-    @apply mx-auto shadow-inner my-5 bg-stone-400/50;
+    @apply mx-auto shadow-inner my-5 bg-img-bg;
   }
 
   input[type="checkbox"] {
-    @apply accent-black;
+    @apply accent-text-primary;
   }
 }

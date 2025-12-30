@@ -1,18 +1,20 @@
 <Layout title="writing - ${title}">
   <style>
-    nav :not([writing]) {
+    nav :not([data-nav-current="writing"]) {
       opacity: 0.5;
       filter: grayscale(1);
     }
   </style>
-  <h1 class="text-3xl">${title}</h1>
-  <p class="pt-2 text-stone-500">Published ${date}</p>
-  <p class="pt-3">${description}</p>
+  <h1 class="text-3xl text-text-primary">${title}</h1>
+  <p class="pt-2 text-text-secondary">Published ${date}</p>
+  <p class="pt-3 text-text-tertiary">${description}</p>
   <div class="py-8">
-    <hr class="border-px border-blue-700/20" />
+    <hr class="border-px border-border" />
   </div>
   <article class="pb-16 prose">${--content}</article>
-  <div class="min-h-96 sepia-[20%]">
+  <div
+    class="min-h-96 sepia-20 dark:sepia-0 dark:invert-100 dark:hue-rotate-180 dark:sepia-20 opacity-90"
+  >
     <script
       src="https://giscus.app/client.js"
       data-repo="Tnixc/website-v6"

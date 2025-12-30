@@ -10,11 +10,16 @@
     <markdown>
 # Writing
 
-I don't write often, unfortunately. I'll try to write more.
+I'll try to write more
 </markdown>
   </div>
+  <style>
+    .timeline::before {
+      background: linear-gradient(to bottom, var(--color-accent-subtle), transparent);
+    }
+  </style>
   <div
-    class="flex relative flex-col gap-0 pt-10 before:absolute before:from-blue-400/30 before:bg-linear-to-b before:top-12 before:bottom-2 before:-left-4 before:w-px "
+    class="timeline flex relative flex-col gap-0 pt-10 before:absolute before:top-12 before:bottom-2 before:-left-4 before:w-px"
   >
     <-Template{Post} />
   </div>

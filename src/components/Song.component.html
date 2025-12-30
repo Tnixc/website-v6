@@ -1,20 +1,30 @@
+<style>
+  #song-status[data-playing="true"] {
+    background-color: #90b99f;
+  }
+  #song-status[data-playing="false"] {
+    background-color: #ea83a5;
+  }
+</style>
 <div class="mt-10">
   <div class="flex relative gap-2 items-center">
     <span
       id="song-status"
-      class="h-8 w-1 outline-white/50 -outline-offset-1 outline-1 data-[playing=true]:bg-lime-400 data-[playing=true]:animate-pulse data-[playing=false]:bg-red-400"
+      class="h-8 w-1 data-[playing=true]:animate-pulse"
     ></span>
     <div
       id="song-cover-art"
-      class="bg-center bg-no-repeat bg-contain min-w-8 min-h-8 outline-stone-500/20 -outline-offset-1 outline-1 bg-radial"
+      class="bg-center bg-no-repeat bg-contain min-w-8 min-h-8 outline-border -outline-offset-1 outline-1 bg-radial"
     ></div>
-    <div class="pl-2 text-stone-600">
+    <div class="pl-2 text-text-secondary">
       <div id="song-info">
-        I'm listening to <em class="text-stone-800" id="song-title">Song Title</em> -
-        <em class="text-stone-800" id="song-artist">Artist Name</em>
+        I'm listening to
+        <em class="text-text-primary" id="song-artist">Artist Name</em>
+        —
+        <em class="text-text-primary" id="song-title">Song Title</em>
       </div>
-      <p id="not-listening" class="text-stone-600 hidden">
-       <code>(* ´ ｰ`) ZZzz</code> -- not listening to anything
+      <p id="not-listening" class="hidden">
+        <code>(* ´ ｰ`) ZZzz</code> — not listening to anything
       </p>
     </div>
   </div>
