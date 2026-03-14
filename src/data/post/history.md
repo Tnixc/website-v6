@@ -3,6 +3,7 @@ title: The History of this Site
 description: it's changed a lot, but it's not the end.
 date: Apr 30 2025
 ---
+
 I launched the first edition of enochlau.com just 10 months ago! Feels like a lifetime ago already. Each iteration of the site has reflected my growth and learning at the time.
 
 ## v1

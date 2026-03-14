@@ -130,7 +130,7 @@ body {
   }
 
   li {
-    @apply pt-1;
+    @apply pt-1 text-text-secondary;
   }
 
   li > ul,
