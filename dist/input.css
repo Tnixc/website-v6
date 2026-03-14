@@ -4,31 +4,28 @@
   --font-serif: "Sentient", "serif";
   --font-mono: "Lilex", ui-monospace;
 
-  --color-bg: light-dark(#fbf7ec, #161617);
-  --color-bg-grid: light-dark(rgb(168 162 158 / 0.05), rgb(68 68 72 / 0.2));
+  --color-bg: light-dark(#faf7f6, #191515);
+  --color-bg-grid: light-dark(rgb(173 154 154 / 0.08), rgb(64 50 50 / 0.3));
 
-  --color-text-primary: light-dark(#1c1917, #c9c7cd);
-  --color-text-secondary: light-dark(#57534e, #9f9ca6);
-  --color-text-tertiary: light-dark(#78716c, #8b8693);
+  --color-text-primary: light-dark(#271e1e, #ddd2d2);
+  --color-text-secondary: light-dark(#5c4a4a, #a89696);
+  --color-text-tertiary: light-dark(#7d6c6c, #7d6c6c);
 
-  --color-accent: light-dark(#2563eb, #92a2d5);
-  --color-accent-bg: light-dark(rgb(37 99 235 / 0.1), rgb(146 162 213 / 0.1));
+  --color-accent: light-dark(#b85a62, #ebbcba);
+  --color-accent-bg: light-dark(rgb(184 90 98 / 0.1), rgb(235 188 186 / 0.1));
   --color-accent-subtle: light-dark(
-    rgb(37 99 235 / 0.5),
-    rgb(146 162 213 / 0.5)
+    rgb(184 90 98 / 0.5),
+    rgb(235 188 186 / 0.5)
   );
 
-  --color-border: light-dark(rgb(37 99 235 / 0.1), rgb(146 162 213 / 0.1));
-  --color-border-strong: light-dark(#a8a29e, #6c6874);
+  --color-border: light-dark(rgb(184 90 98 / 0.12), rgb(235 188 186 / 0.1));
+  --color-border-strong: light-dark(#a08e8e, #5c4a4a);
 
-  --color-mark-bg: light-dark(rgb(217 119 6 / 0.1), rgb(230 185 157 / 0.15));
-  --color-code-bg: light-dark(rgb(168 162 158 / 0.2), rgb(68 68 72 / 0.4));
-  --color-table-bg: light-dark(rgb(168 162 158 / 0.3), rgb(68 68 72 / 0.3));
-  --color-table-border: light-dark(
-    rgb(168 162 158 / 0.5),
-    rgb(108 104 116 / 0.5)
-  );
-  --color-img-bg: light-dark(rgb(168 162 158 / 0.5), rgb(49 49 52 / 0.5));
+  --color-mark-bg: light-dark(rgb(184 90 98 / 0.1), rgb(235 188 186 / 0.1));
+  --color-code-bg: light-dark(rgb(173 154 154 / 0.12), rgb(64 50 50 / 0.4));
+  --color-table-bg: light-dark(rgb(173 154 154 / 0.1), rgb(64 50 50 / 0.3));
+  --color-table-border: light-dark(rgb(173 154 154 / 0.3), rgb(64 50 50 / 0.5));
+  --color-img-bg: light-dark(rgb(173 154 154 / 0.2), rgb(40 32 32 / 0.5));
 }
 
 @font-face {
@@ -61,11 +58,11 @@ html {
 }
 
 body {
-  font-family: "Sentient", "serif";
+  @apply font-serif;
   background-image:
     linear-gradient(to right, var(--color-bg-grid) 1px, transparent 1px),
     linear-gradient(to bottom, var(--color-bg-grid) 1px, transparent 1px);
-  background-size: 24px 24px;
+  background-size: 44px 44px;
 }
 
 .prose {
@@ -133,7 +130,7 @@ body {
   }
 
   li {
-    @apply pt-1 text-text-tertiary;
+    @apply pt-1;
   }
 
   li > ul,
