@@ -18,12 +18,14 @@
   <body
     class="flex flex-col justify-center items-center p-4 lg:py-32 before:fixed before:inset-0 before:-z-10"
   >
-    <div class="flex flex-col gap-7 max-w-3xl w-full">
+    <div class="flex flex-col gap-7 w-full max-w-3xl">
       <Nav />
       <main class="p-4 w-full shadow-sm lg:p-12 bg-bg">
         <slot></slot>
       </main>
-      <footer class="px-4 lg:px-12 flex-col gap-4 prose list-none flex *:w-fit items-end min-h-96">
+      <footer
+        class="px-4 lg:px-12 flex-col gap-4 prose list-none flex *:w-fit items-end min-h-96"
+      >
         <a href="https://github.com/tnixc">GitHub</a>
         <span>Email: <code>enochlauenoch[at]gmail.com</code></span>
         <span>Discord: <code>Tnixc</code> </span>
